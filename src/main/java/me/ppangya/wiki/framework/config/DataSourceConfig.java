@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @Configuration
-public class JdbcDataSourceConfig {
+public class DataSourceConfig {
 
 	private @Value("${me.ppangya.wiki.jdbc.driver.class.name}") String driverClassName;
 	private @Value("${me.ppangya.wiki.jdbc.url}") String url;

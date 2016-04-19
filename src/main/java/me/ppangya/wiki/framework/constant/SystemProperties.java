@@ -1,18 +1,18 @@
 package me.ppangya.wiki.framework.constant;
 
-public class SystemEnvironment {
+public class SystemProperties {
 
-	public static final String OBJECT_REALTIONAL_MAPPING_NAME = "orm";
+	public static final String OBJECT_RELATIONAL_MAPPING_NAME = "orm";
 
 	public enum ObjectRelationalMapping {
 		JDBC,
 		MYBATIS,
-		JPA;
+		JPA
 	}
 
 	private ObjectRelationalMapping objectRelationalMapping;
 
-	public SystemEnvironment(ObjectRelationalMapping objectRelationalMapping) {
+	public SystemProperties(ObjectRelationalMapping objectRelationalMapping) {
 		this.objectRelationalMapping = objectRelationalMapping;
 	}
 

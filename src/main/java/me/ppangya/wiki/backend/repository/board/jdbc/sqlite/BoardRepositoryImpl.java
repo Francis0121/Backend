@@ -1,24 +1,20 @@
-package me.ppangya.wiki.backend.repository.board.sqlite;
+package me.ppangya.wiki.backend.repository.board.jdbc.sqlite;
 
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import me.ppangya.wiki.framework.annotation.JdbcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 
-@Repository
+@JdbcRepository
 public class BoardRepositoryImpl implements BoardRepository {
-
-	private static final Logger logger = LoggerFactory.getLogger(BoardRepositoryImpl.class);
 
 	private @Autowired JdbcTemplate jdbcTemplate;
 

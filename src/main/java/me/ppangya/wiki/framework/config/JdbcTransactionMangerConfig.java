@@ -1,12 +1,9 @@
 package me.ppangya.wiki.framework.config;
 
+import me.ppangya.wiki.framework.annotation.JdbcRepository;
 import org.apache.tomcat.jdbc.pool.DataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AdviceMode;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -14,9 +11,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-public class JdbcTemplateConfig {
-
-	private static final Logger logger = LoggerFactory.getLogger(JdbcTemplateConfig.class);
+@ComponentScan(useDefaultFilters = false,
+               basePackages = "me.ppangya.wiki.backend.repository",
+               includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = JdbcRepository.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = JdbcRepository.class)})
+public class JdbcTransactionMangerConfig {
 
 	private @Autowired DataSource dataSource;
 
