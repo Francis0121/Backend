@@ -12,12 +12,13 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 @Configuration
 public class JdbcDataSourceConfig {
 
-	private @Value("${me.ppangya.wiki.jdbc.driver.classs.name}") String driverClassName;
+	private @Value("${me.ppangya.wiki.jdbc.driver.class.name}") String driverClassName;
 	private @Value("${me.ppangya.wiki.jdbc.url}") String url;
+	private @Value("${me.ppangya.wiki.jdbc.initializer.enabled}") Boolean initializerEnabled;
 
 	private @Value("scheme/init.sql") Resource initDatabaseResource;
 
-	@Bean(name = "dataSource", destroyMethod = "close")
+	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		DataSource dataSource = new DataSource();
 		dataSource.setDriverClassName(driverClassName);
@@ -25,17 +26,16 @@ public class JdbcDataSourceConfig {
 		return dataSource;
 	}
 
-	@Bean(name = "dataSourceInitializer")
+	@Bean
 	public DataSourceInitializer dataSourceInitializer() {
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
 		dataSourceInitializer.setDataSource(dataSource());
-		dataSourceInitializer.setEnabled(true);
+		dataSourceInitializer.setEnabled(initializerEnabled);
 		dataSourceInitializer.setDatabasePopulator(databasePopulator());
 		return dataSourceInitializer;
 	}
 
-	@Bean(name = "databasePopulator")
-	public DatabasePopulator databasePopulator() {
+	private DatabasePopulator databasePopulator() {
 		ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
 		resourceDatabasePopulator.addScript(initDatabaseResource);
 		return resourceDatabasePopulator;

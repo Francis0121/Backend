@@ -8,20 +8,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement()
 public class JdbcTemplateConfig {
 
 	private static final Logger logger = LoggerFactory.getLogger(JdbcTemplateConfig.class);
 
 	private @Autowired DataSource dataSource;
 
-	@Bean(name = "jdbcTemplate")
+	@Bean
 	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource);
 	}
 
-	@Bean(name = "dataSourceTransactionManager")
+	@Bean
 	public DataSourceTransactionManager dataSourceTransactionManager() {
 		return new DataSourceTransactionManager(dataSource);
 	}
