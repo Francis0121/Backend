@@ -7,11 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.annotation.PostConstruct;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
 public class JdbcTemplateConfig {
@@ -20,23 +16,13 @@ public class JdbcTemplateConfig {
 
 	private @Autowired DataSource dataSource;
 
-	@PostConstruct
-	public void init() {
-		try {
-			Connection connection = dataSource.getConnection();
-			Statement statement = connection.createStatement();
-			statement.execute("DROP TABLE IF EXISTS BOARD");
-			statement.executeUpdate("CREATE TABLE BOARD( board_id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100) NULL) ");
-			statement.close();
-			connection.close();
-		} catch (SQLException e) {
-			logger.error("Create Database Table", e);
-		}
-		logger.info("Create Database Table");
-	}
-
 	@Bean(name = "jdbcTemplate")
 	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource);
+	}
+
+	@Bean(name = "dataSourceTransactionManager")
+	public DataSourceTransactionManager dataSourceTransactionManager() {
+		return new DataSourceTransactionManager(dataSource);
 	}
 }
