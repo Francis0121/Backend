@@ -44,4 +44,10 @@ public class RootApplicationConfigTest {
 		Object dataSource = applicationContext.getBean("dataSource");
 		Assert.assertNotNull(dataSource);
 	}
+
+	@Test
+	public void initJdbcTemplateTest() {
+		Object jdbcTemplate = applicationContext.getBean("jdbcTemplate");
+		Assert.assertNotNull(jdbcTemplate);
+	}
 }
