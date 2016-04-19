@@ -6,7 +6,7 @@
 
     <groupId>me.ppangya.wiki</groupId>
     <artifactId>backend</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <properties>
         <!-- Maven Project Build Setting -->
