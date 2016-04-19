@@ -3,6 +3,8 @@ package me.ppangya.wiki.framework.config;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,12 +16,14 @@ import java.util.Date;
 @ContextConfiguration(classes = RootApplicationConfig.class)
 public class RootApplicationConfigTest {
 
+	private static final Logger logger = LoggerFactory.getLogger(RootApplicationConfigTest.class);
+
 	private @Autowired ApplicationContext applicationContext;
 
 	@Test
 	public void initRootApplicationConfig() {
 		Assert.assertNotNull(applicationContext);
 		Date date = new Date(applicationContext.getStartupDate());
-		System.out.println(date.toString());
+		logger.info(String.valueOf(date));
 	}
 }
