@@ -22,7 +22,7 @@ public class BoardRepositoryImplTest {
 
 	@Test
 	public void insertBoard() {
-		Board board = new Board("Board, Title");
+		Board board = new Board("Board Title");
 		board = boardRepository.insert(board);
 		Assert.assertNotNull(board);
 		Assert.assertNotNull(board.getBoardId());

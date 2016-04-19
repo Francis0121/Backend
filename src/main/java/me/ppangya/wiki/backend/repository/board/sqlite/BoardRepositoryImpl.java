@@ -25,7 +25,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	private static final String INSERT_SQL = "INSERT INTO BOARD (title) VALUES (?)";
 
 	@Override
-	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public Board insert(Board board) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(connection -> {
