@@ -1,5 +1,6 @@
 package me.ppangya.wiki.framework.config;
 
+import me.ppangya.wiki.framework.constant.SystemEnvironment;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 import java.util.stream.Stream;
+
+import static me.ppangya.wiki.framework.constant.SystemEnvironment.ObjectRelationalMapping;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RootApplicationConfig.class)
@@ -49,5 +52,15 @@ public class RootApplicationConfigTest {
 	public void initJdbcTemplateTest() {
 		Object jdbcTemplate = applicationContext.getBean("jdbcTemplate");
 		Assert.assertNotNull(jdbcTemplate);
+	}
+
+	@Test
+	public void initSystemEnvironment() {
+		Object object = applicationContext.getBean("systemEnvironment");
+		Assert.assertNotNull(object);
+		Assert.assertTrue(object instanceof SystemEnvironment);
+		SystemEnvironment systemEnvironment = (SystemEnvironment) object;
+		ObjectRelationalMapping objectRelationalMapping = systemEnvironment.getObjectRelationalMapping();
+		Assert.assertEquals(ObjectRelationalMapping.JDBC, objectRelationalMapping);
 	}
 }
