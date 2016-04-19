@@ -5,6 +5,7 @@ Wiki-Backend Proejct. Based on spring framework.
 	* core
 	* jdbc
 	* web
+	* aspects
 	* test
 * Database
 	* org.serial.sqlite-jdbc 3.8.11.2
@@ -13,6 +14,7 @@ Wiki-Backend Proejct. Based on spring framework.
 	* Junit 4.12
 		* Logger : 
 		* Slf4j 1.7.21
+	 		* jcl-over-slf4j (enable spring log)
 		* Logback 1.1.7
 			* groovy 2.4.6
   		
@@ -34,6 +36,7 @@ Use `logback.groovy`.
   * config
     * RootApplication
     * DispatcherServlet
+  * constant
 
 * me.ppangya.me.backend
   * controller
