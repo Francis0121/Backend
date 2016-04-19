@@ -16,7 +16,7 @@ public class DataSourceConfig {
 	private @Value("${me.ppangya.wiki.jdbc.url}") String url;
 	private @Value("${me.ppangya.wiki.jdbc.initializer.enabled}") Boolean initializerEnabled;
 
-	private @Value("scheme/init.sql") Resource initDatabaseResource;
+	private @Value("database/scheme/init.sql") Resource initDatabaseResource;
 
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {

@@ -24,6 +24,8 @@
         <!-- Database -->
         <org.xerial.sqlite.version>3.8.11.2</org.xerial.sqlite.version>
         <org.apache.tomcat.version>8.0.20</org.apache.tomcat.version>
+        <org.mybatis.version>3.4.0</org.mybatis.version>
+        <org.mybatis.spring.version>1.3.0</org.mybatis.spring.version>
 
         <!-- Logger -->
         <org.slf4j.version>1.7.21</org.slf4j.version>
@@ -78,7 +80,6 @@
             <version>${org.springframework.version}</version>
         </dependency>
 
-
         <!-- Database -->
         <dependency>
             <groupId>org.xerial</groupId>
@@ -90,6 +91,18 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
             <version>${org.apache.tomcat.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${org.mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${org.mybatis.spring.version}</version>
         </dependency>
 
         <!-- Logger -->
