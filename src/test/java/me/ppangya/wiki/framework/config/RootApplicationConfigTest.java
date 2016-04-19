@@ -34,8 +34,14 @@ public class RootApplicationConfigTest {
 	}
 
 	@Test
-	public void propertiesSettingTest() {
+	public void initPropertiesTest() {
 		Assert.assertNotNull(properties);
 		Assert.assertEquals("backend", properties);
+	}
+
+	@Test
+	public void initDataSourceTest() {
+		Object dataSource = applicationContext.getBean("dataSource");
+		Assert.assertNotNull(dataSource);
 	}
 }
