@@ -4,4 +4,6 @@ appender('console', ConsoleAppender) {
     }
 }
 
+logger('org.springframework.jdbc.core', DEBUG, ['console'])
+
 root(DEBUG, ['console'])

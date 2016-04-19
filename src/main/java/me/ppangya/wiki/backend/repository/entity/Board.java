@@ -8,6 +8,11 @@ public class Board {
 	public Board() {
 	}
 
+	public Board(Long boardId, String title) {
+		this.boardId = boardId;
+		this.title = title;
+	}
+
 	public Board(String title) {
 		this.title = title;
 	}
