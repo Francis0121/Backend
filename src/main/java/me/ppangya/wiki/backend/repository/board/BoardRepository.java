@@ -5,7 +5,7 @@ import org.springframework.data.repository.Repository;
 
 import java.util.Optional;
 
-public interface BoardRepository extends Repository<Board, Long> {
+public interface BoardRepository extends Repository<Board, Long>, BoardRepositoryCustom {
 
 	Optional<Board> findOne(Long id);
 

@@ -1,8 +1,8 @@
 package me.ppangya.wiki.framework.config;
 
-import me.ppangya.wiki.framework.annotation.MybatisRepository;
 import me.ppangya.wiki.framework.annotation.OrmConditional;
 import me.ppangya.wiki.framework.constant.SystemProperties;
+import me.ppangya.wiki.framework.util.OrmRepositoryFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -16,11 +16,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+@OrmConditional(values = SystemProperties.ObjectRelationalMapping.MYBATIS)
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-@OrmConditional(values = SystemProperties.ObjectRelationalMapping.MYBATIS)
-@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = MybatisRepository.class)})
+@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = OrmRepositoryFilter.class)})
 public class MybatisTransactionMangerConfig {
 
 	private @Autowired @Qualifier("sqliteDataSource") DataSource dataSource;
