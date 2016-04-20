@@ -1,9 +1,13 @@
 package me.ppangya.wiki.backend.repository.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "BOARD")
 public class Board {
 
-	private Long boardId;
-	private String title;
+	private @Id @GeneratedValue @Column(name = "board_id", nullable = false, unique = true) Long boardId;
+	private @Column(name = "title", nullable = true, length = 100) String title;
 
 	public Board() {
 	}

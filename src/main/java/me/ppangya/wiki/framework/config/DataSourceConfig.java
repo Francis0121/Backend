@@ -12,25 +12,29 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 @Configuration
 public class DataSourceConfig {
 
-	private @Value("${me.ppangya.wiki.jdbc.driver.class.name}") String driverClassName;
-	private @Value("${me.ppangya.wiki.jdbc.url}") String url;
-	private @Value("${me.ppangya.wiki.jdbc.initializer.enabled}") Boolean initializerEnabled;
+	/**
+	 * Sqlite
+	 */
+
+	private @Value("${me.ppangya.wiki.sqlite.jdbc.driver.class.name}") String sqliteDriverClassName;
+	private @Value("${me.ppangya.wiki.sqlite.jdbc.url}") String sqliteUrl;
+	private @Value("${me.ppangya.wiki.sqlite.jdbc.initializer.enabled}") Boolean sqliteInitializerEnabled;
 
 	private @Value("database/scheme/init.sql") Resource initDatabaseResource;
 
 	@Bean(destroyMethod = "close")
-	public DataSource dataSource() {
+	public DataSource sqliteDataSource() {
 		DataSource dataSource = new DataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
+		dataSource.setDriverClassName(sqliteDriverClassName);
+		dataSource.setUrl(sqliteUrl);
 		return dataSource;
 	}
 
 	@Bean
 	public DataSourceInitializer dataSourceInitializer() {
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-		dataSourceInitializer.setDataSource(dataSource());
-		dataSourceInitializer.setEnabled(initializerEnabled);
+		dataSourceInitializer.setDataSource(sqliteDataSource());
+		dataSourceInitializer.setEnabled(sqliteInitializerEnabled);
 		dataSourceInitializer.setDatabasePopulator(databasePopulator());
 		return dataSourceInitializer;
 	}
@@ -39,5 +43,24 @@ public class DataSourceConfig {
 		ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
 		resourceDatabasePopulator.addScript(initDatabaseResource);
 		return resourceDatabasePopulator;
+	}
+
+	/**
+	 *  H2
+	 */
+
+	private @Value("${me.ppangya.wiki.h2.jdbc.driver.class.name}") String h2DriverClassName;
+	private @Value("${me.ppangya.wiki.h2.jdbc.url}") String h2Url;
+	private @Value("${me.ppangya.wiki.h2.jdbc.username}") String h2Username;
+	private @Value("${me.ppangya.wiki.h2.jdbc.password}") String h2Password;
+
+	@Bean(destroyMethod = "close")
+	public DataSource h2DataSource() {
+		DataSource dataSource = new DataSource();
+		dataSource.setDriverClassName(h2DriverClassName);
+		dataSource.setUrl(h2Url);
+		dataSource.setUsername(h2Username);
+		dataSource.setPassword(h2Password);
+		return dataSource;
 	}
 }

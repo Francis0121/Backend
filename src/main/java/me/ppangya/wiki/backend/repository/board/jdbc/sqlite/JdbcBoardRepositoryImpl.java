@@ -12,9 +12,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
+import java.util.Optional;
 
-@JdbcRepository
-public class BoardRepositoryImpl implements BoardRepository {
+@JdbcRepository("jdbcBoardRepositoryImpl")
+public class JdbcBoardRepositoryImpl implements BoardRepository {
 
 	private @Autowired JdbcTemplate jdbcTemplate;
 
@@ -22,7 +23,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
-	public Board insert(Board board) {
+	public Board save(Board board) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{"board_id"});
@@ -30,5 +31,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 			return ps;
 		}, keyHolder);
 		return new Board(keyHolder.getKey().longValue(), board.getTitle());
+	}
+
+	@Override
+	public Optional<Board> findOne(Long id) {
+		return null;
 	}
 }

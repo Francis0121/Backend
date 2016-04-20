@@ -13,16 +13,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @JdbcTransactionalTest
-public class BoardRepositoryImplTest {
+public class JdbcBoardRepositoryImplTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(BoardRepositoryImplTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(JdbcBoardRepositoryImplTest.class);
 
 	private @Autowired BoardRepository boardRepository;
 
 	@Test
-	public void insertBoard() {
+	public void saveTest() {
 		Board board = new Board("Board Title");
-		board = boardRepository.insert(board);
+		board = boardRepository.save(board);
 		Assert.assertNotNull(board);
 		Assert.assertNotNull(board.getBoardId());
 		Assert.assertNotNull(board.getTitle());
