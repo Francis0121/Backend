@@ -1,5 +1,6 @@
 package me.ppangya.wiki.backend.repository.board.mybatis.sqlite;
 
+import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.framework.annotation.MybatisRepository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @MybatisRepository
+@Slf4j
 public class MybatisBoardRepositoryImpl implements BoardRepository {
 
 	private @Autowired SqlSessionTemplate sqlSessionTemplate;
@@ -24,6 +26,7 @@ public class MybatisBoardRepositoryImpl implements BoardRepository {
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public <S extends Board> Board save(S board) {
+		log.debug("Save Parameter : {}", board.toString());
 		sqlSessionTemplate.insert("board.insertBoard", board);
 		return board;
 	}
