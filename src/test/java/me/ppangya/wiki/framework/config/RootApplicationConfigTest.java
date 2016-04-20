@@ -31,8 +31,6 @@ public class RootApplicationConfigTest {
 		String[] beans = applicationContext.getBeanDefinitionNames();
 		Optional<List<String>> beanListOptional = Optional.ofNullable(Arrays.asList(beans));
 		beanListOptional.map(Collection::stream).orElse(Stream.<String>empty()).forEach(logger::info);
-
-		Assert.assertNotNull(applicationContext.getBean("boardRepositoryImpl"));
 	}
 
 	@Test
@@ -42,8 +40,14 @@ public class RootApplicationConfigTest {
 	}
 
 	@Test
-	public void dataSourceBeanCreateTest() {
-		Object dataSource = applicationContext.getBean("dataSource");
+	public void sqliteDataSourceBeanCreateTest() {
+		Object dataSource = applicationContext.getBean("sqliteDataSource");
+		Assert.assertNotNull(dataSource);
+	}
+
+	@Test
+	public void h2DataSourceBeanCreateTest() {
+		Object dataSource = applicationContext.getBean("h2DataSource");
 		Assert.assertNotNull(dataSource);
 	}
 

@@ -15,7 +15,7 @@ import java.util.function.BooleanSupplier;
 import static me.ppangya.wiki.framework.constant.SystemProperties.OBJECT_RELATIONAL_MAPPING_NAME;
 
 @Configuration
-@Import(value = {DataSourceConfig.class, JpaTransactionMangerConfig.class})
+@Import(value = {DataSourceConfig.class, MybatisTransactionMangerConfig.class})
 @PropertySource(value = "classpath:properties/default.properties")
 public class RootApplicationConfig {
 

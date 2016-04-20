@@ -23,7 +23,7 @@ public class JpaBoardRepositoryImplTest {
 
 	@Test
 	public void saveTest() {
-		Board board = new Board("Board Title");
+		Board board = new Board(null, "Board Title");
 		board = boardRepository.save(board);
 		Assert.assertNotNull(board);
 		Assert.assertNotNull(board.getBoardId());
@@ -33,7 +33,7 @@ public class JpaBoardRepositoryImplTest {
 
 	@Test
 	public void findOneTest(){
-		Board board = new Board("Board Title");
+		Board board = new Board(null, "Board Title");
 		board = boardRepository.save(board);
 
 		Optional<Board> boardOptional = boardRepository.findOne(board.getBoardId());
