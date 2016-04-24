@@ -1,3 +1,4 @@
+/ppangya.wiki.trace.db
 ### Maven template
 target/
 pom.xml.tag
@@ -62,3 +63,7 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+
+# db file
+/ppangya.wiki.mv.db
+/ppangya.wiki.db
