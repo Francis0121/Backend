@@ -3,6 +3,8 @@ package me.ppangya.wiki.backend.repository.board.jdbc;
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
+import me.ppangya.wiki.framework.annotation.OrmConditional;
+import me.ppangya.wiki.framework.constant.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Slf4j
 @Repository
+@OrmConditional(values = SystemProperties.ObjectRelationalMapping.JDBC)
 public class BoardRepositoryImpl implements BoardRepository {
 
 	private @Autowired JdbcTemplate jdbcTemplate;

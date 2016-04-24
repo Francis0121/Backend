@@ -2,14 +2,11 @@ package me.ppangya.wiki.framework.config;
 
 import me.ppangya.wiki.framework.annotation.OrmConditional;
 import me.ppangya.wiki.framework.constant.SystemProperties;
-import me.ppangya.wiki.framework.util.OrmRepositoryFilter;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.hibernate.dialect.H2Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -21,7 +18,7 @@ import java.util.Properties;
 
 @OrmConditional(values = SystemProperties.ObjectRelationalMapping.JPA)
 @Configuration
-@EnableJpaRepositories(basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = OrmRepositoryFilter.class)}, entityManagerFactoryRef = "localContainerEntityManagerFactoryBean", transactionManagerRef = "dataSourceTransactionManager")
+@EnableJpaRepositories(basePackages = "me.ppangya.wiki.backend.repository", entityManagerFactoryRef = "localContainerEntityManagerFactoryBean", transactionManagerRef = "dataSourceTransactionManager")
 public class JpaTransactionMangerConfig {
 
 	static {

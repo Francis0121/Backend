@@ -15,6 +15,7 @@ import java.util.function.BooleanSupplier;
 import static me.ppangya.wiki.framework.constant.SystemProperties.OBJECT_RELATIONAL_MAPPING_NAME;
 
 @Slf4j
+@Deprecated
 public class OrmRepositoryFilter implements TypeFilter {
 
 	@Override
