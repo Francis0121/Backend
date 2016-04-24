@@ -8,7 +8,6 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.io.Resource;
@@ -22,10 +21,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = OrmRepositoryFilter.class)})
 public class MybatisTransactionMangerConfig {
 
-	private @Autowired @Qualifier("sqliteDataSource") DataSource dataSource;
+	private @Autowired DataSource dataSource;
 
 	private @Value("database/mybatis/mybatis-config.xml") Resource mybatisConfigResource;
-	private @Value("database/mybatis/*Mapper.xml") Resource[] mybatisMapperResources;
+	private @Value("database/mybatis/${database}/*Mapper.xml") Resource[] mybatisMapperResources;
 
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() {

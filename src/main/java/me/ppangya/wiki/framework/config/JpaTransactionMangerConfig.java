@@ -6,7 +6,6 @@ import me.ppangya.wiki.framework.util.OrmRepositoryFilter;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.hibernate.dialect.H2Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,7 @@ public class JpaTransactionMangerConfig {
 		System.setProperty("org.jboss.logging.provider", "slf4j");
 	}
 
-	private @Autowired @Qualifier("h2DataSource") DataSource dataSource;
+	private @Autowired DataSource dataSource;
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {

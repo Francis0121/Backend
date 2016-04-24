@@ -1,8 +1,15 @@
 package me.ppangya.wiki.framework.constant;
 
+import lombok.*;
+
+@ToString
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class SystemProperties {
 
 	public static final String OBJECT_RELATIONAL_MAPPING_NAME = "orm";
+
+	public static final String DATABASE_NAME = "database";
 
 	public enum ObjectRelationalMapping {
 		JDBC,
@@ -10,21 +17,12 @@ public class SystemProperties {
 		JPA
 	}
 
-	private ObjectRelationalMapping objectRelationalMapping;
-
-	public SystemProperties(ObjectRelationalMapping objectRelationalMapping) {
-		this.objectRelationalMapping = objectRelationalMapping;
+	public enum Database {
+		SQLITE,
+		H2
 	}
 
-	public ObjectRelationalMapping getObjectRelationalMapping() {
-		return objectRelationalMapping;
-	}
+	private @Getter ObjectRelationalMapping objectRelationalMapping;
 
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder("SystemEnvironment{");
-		sb.append("objectRelationalMapping=").append(objectRelationalMapping);
-		sb.append('}');
-		return sb.toString();
-	}
+	private @Getter Database database;
 }

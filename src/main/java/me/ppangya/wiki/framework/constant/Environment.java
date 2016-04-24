@@ -17,4 +17,11 @@ public interface Environment {
 		.map(Enum::name)
 		.map(String::toLowerCase)
 		.collect(Collectors.toList());
+
+	List<SystemProperties.Database> DATABASE_LIST = Arrays.asList(SystemProperties.Database.values());
+
+	List<String> DATABASE_NAME_LIST = DATABASE_LIST.stream()
+		.map(Enum::name)
+		.map(String::toLowerCase)
+		.collect(Collectors.toList());
 }
