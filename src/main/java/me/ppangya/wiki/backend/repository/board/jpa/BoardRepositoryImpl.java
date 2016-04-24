@@ -1,4 +1,4 @@
-package me.ppangya.wiki.backend.repository.board.jpa.h2;
+package me.ppangya.wiki.backend.repository.board.jpa;
 
 import me.ppangya.wiki.backend.repository.board.BoardRepositoryCustom;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package me.ppangya.wiki.backend.repository.board.jdbc.sqlite;
+package me.ppangya.wiki.backend.repository.board.jdbc;
 
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;

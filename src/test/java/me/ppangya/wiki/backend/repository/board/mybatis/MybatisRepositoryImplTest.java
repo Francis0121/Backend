@@ -1,4 +1,4 @@
-package me.ppangya.wiki.backend.repository.board.mybatis.sqlite;
+package me.ppangya.wiki.backend.repository.board.mybatis;
 
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;

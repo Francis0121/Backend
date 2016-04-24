@@ -1,4 +1,4 @@
-package me.ppangya.wiki.backend.repository.board.mybatis.sqlite;
+package me.ppangya.wiki.backend.repository.board.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
