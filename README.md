@@ -5,6 +5,7 @@ Wiki-Backend Proejct. Based on spring framework.
 	* core
 	* jdbc
 	* web
+	* webmvc
 	* aspects
 	* test
 * Database

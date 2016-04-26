@@ -4,11 +4,9 @@ import me.ppangya.wiki.framework.constant.Environment;
 import me.ppangya.wiki.framework.constant.SystemProperties;
 import me.ppangya.wiki.framework.constant.SystemProperties.Database;
 import me.ppangya.wiki.framework.constant.SystemProperties.ObjectRelationalMapping;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.util.function.BooleanSupplier;
@@ -19,6 +17,7 @@ import static me.ppangya.wiki.framework.constant.SystemProperties.OBJECT_RELATIO
 @Configuration
 @Import(value = {DataSourceConfig.class, JdbcTransactionMangerConfig.class, MybatisTransactionMangerConfig.class, JpaTransactionMangerConfig.class})
 @PropertySource(value = "classpath:properties/default.properties")
+@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class)})
 public class RootApplicationConfig {
 
 	@Bean
