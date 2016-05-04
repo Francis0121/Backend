@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @OrmConditional(values = SystemProperties.ObjectRelationalMapping.MYBATIS)
 @Configuration
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class MybatisTransactionMangerConfig {
 
 	private @Autowired DataSource dataSource;

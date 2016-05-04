@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @OrmConditional(values = SystemProperties.ObjectRelationalMapping.JDBC)
 @Configuration
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class JdbcTransactionMangerConfig {
 
 	private @Autowired DataSource dataSource;
