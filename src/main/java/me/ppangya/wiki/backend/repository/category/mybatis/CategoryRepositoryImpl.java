@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -32,6 +33,12 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		log.debug("Save Parameter : {}", category.toString());
 		sqlSessionTemplate.insert("category.insertCategory", category);
 		return category;
+	}
+
+	@Override
+	public Optional<List<Category>> findAll() {
+		List<Category> categoryList = sqlSessionTemplate.selectList("category.findAll");
+		return Optional.ofNullable(categoryList);
 	}
 
 }

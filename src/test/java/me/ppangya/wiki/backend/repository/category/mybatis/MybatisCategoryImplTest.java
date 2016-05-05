@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+import java.util.Optional;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @MybatisTransactionalTest
 public class MybatisCategoryImplTest {
@@ -25,8 +28,17 @@ public class MybatisCategoryImplTest {
 		category = categoryRepository.save(category);
 		Assert.assertNotNull(category);
 		Assert.assertNotNull(category.getCategoryId());
-		Assert.assertNotNull(category.getCategory());
+		Assert.assertNotNull(category.getName());
 		logger.debug("Insert : {}", category);
+
 	}
+
+    @Test
+    public void findTest() {
+        saveTest();
+        Optional<List<Category>> category = categoryRepository.findAll();
+        Assert.assertNotNull(category);
+    }
+
 
 }

@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">
 
-
     <insert id="insertCategory" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
-        INSERT INTO CATEGORY (category) VALUES (#{category})
+        INSERT INTO
+          CATEGORY (name)
+        VALUES
+          (#{name})
         <selectKey keyProperty="categoryId" resultType="Long">
             SELECT last_insert_rowid()
         </selectKey>
-
     </insert>
+
+    <select id="findAll" resultType="me.ppangya.wiki.backend.repository.entity.Category">
+        SELECT
+          `category_id` AS categoryId, `name`
+        FROM
+          CATEGORY
+    </select>
+
 </mapper>
