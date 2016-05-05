@@ -30,7 +30,7 @@ public class RootApplicationConfigTest {
 		logger.info(String.valueOf(date));
 		String[] beans = applicationContext.getBeanDefinitionNames();
 		Optional<List<String>> beanListOptional = Optional.ofNullable(Arrays.asList(beans));
-		beanListOptional.map(Collection::stream).orElse(Stream.<String>empty()).forEach(logger::info);
+		beanListOptional.map(Collection::stream).orElse(Stream.<String>empty()).forEach(logger::debug);
 	}
 
 	@Test

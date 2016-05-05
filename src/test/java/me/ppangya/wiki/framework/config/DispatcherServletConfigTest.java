@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DispatcherServletConfig.class)
+@ContextConfiguration(classes = {RootApplicationConfig.class, DispatcherServletConfig.class})
 @WebAppConfiguration
 public class DispatcherServletConfigTest {
 
@@ -29,10 +29,7 @@ public class DispatcherServletConfigTest {
 		log.debug("StartupDate : {}", date);
 		log.debug("BeanDefinition Count : {}", webApplicationContext.getBeanDefinitionCount());
 		Optional<List<String>> beanDefinitionNameListOptional = Optional.ofNullable(Arrays.asList(webApplicationContext.getBeanDefinitionNames()));
-		beanDefinitionNameListOptional.map(Collection::stream).orElse(Stream.<String>empty()).forEach(beanName -> {
-			Assert.assertFalse(beanName.contains("Repository"));
-			log.debug("{}", beanName);
-		});
+		beanDefinitionNameListOptional.map(Collection::stream).orElse(Stream.<String>empty()).forEach(log::debug);
 	}
 
 }

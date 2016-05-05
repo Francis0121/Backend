@@ -50,6 +50,7 @@
         <!-- Junit -->
         <org.junit.version>4.12</org.junit.version>
         <org.mockito.version>1.10.19</org.mockito.version>
+        <com.jayway.jsonpath.version>2.2.0</com.jayway.jsonpath.version>
     </properties>
 
     <repositories>
@@ -225,6 +226,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${com.jayway.jsonpath.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -249,7 +257,8 @@
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <orm>mybatis</orm>
+                        <orm>jpa</orm>
+                        <database>h2</database>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
