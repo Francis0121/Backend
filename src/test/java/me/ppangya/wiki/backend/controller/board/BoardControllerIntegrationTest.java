@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.controller.dto.BoardDTO;
+import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.backend.service.BoardService;
 import me.ppangya.wiki.test.annotation.IntegrationTransactionalTest;
 import org.junit.Before;
@@ -18,8 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Slf4j
@@ -40,21 +40,21 @@ public class BoardControllerIntegrationTest {
 
 	@Test
 	public void getBoard() throws Exception {
-		boardService.insertBoard("Sample Title");
+		Board board = boardService.insertBoard("Sample Title");
 
-		mockMvc.perform(get("/board/1"))
+		mockMvc.perform(get("/board/" + board.getBoardId()))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("boardId", is(1)))
-			.andExpect(jsonPath("title", is("Sample Title")));
+			.andExpect(jsonPath("boardId", is(board.getBoardId())))
+			.andExpect(jsonPath("title", is(board.getTitle())));
 	}
 
 	@Test
 	public void postBoard() throws Exception {
 		BoardDTO boardDTO = new BoardDTO("Sample Title");
 		ObjectMapper objectMapper = new ObjectMapper();
-		ObjectWriter writer = objectMapper.writer();
-		String request = writer.writeValueAsString(boardDTO);
+		ObjectWriter objectWriter = objectMapper.writer();
+		String request = objectWriter.writeValueAsString(boardDTO);
 
 		mockMvc.perform(post("/board").contentType(MediaType.APPLICATION_JSON_UTF8).content(request))
 			.andExpect(status().isOk())
@@ -62,4 +62,28 @@ public class BoardControllerIntegrationTest {
 			.andExpect(jsonPath("boardId", notNullValue()))
 			.andExpect(jsonPath("title", is(boardDTO.getTitle())));
 	}
+
+	@Test
+	public void putBoard() throws Exception {
+		Board board = boardService.insertBoard("Sample Title");
+		BoardDTO boardDTO = new BoardDTO("Sample Modify Title");
+		ObjectMapper objectMapper = new ObjectMapper();
+		ObjectWriter objectWriter = objectMapper.writer();
+		String request = objectWriter.writeValueAsString(boardDTO);
+
+		mockMvc.perform(put("/board/" + board.getBoardId()).contentType(MediaType.APPLICATION_JSON_UTF8)
+			.content(request))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+			.andExpect(jsonPath("boardId", notNullValue()))
+			.andExpect(jsonPath("title", is(boardDTO.getTitle())));
+	}
+
+	@Test
+	public void deleteBoard() throws Exception {
+		Board board = boardService.insertBoard("Sample Title");
+
+		mockMvc.perform(delete("/board/" + board.getBoardId())).andExpect(status().isOk());
+	}
+
 }
