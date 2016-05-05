@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.controller.dto.BoardDTO;
 import me.ppangya.wiki.backend.repository.entity.Board;
-import me.ppangya.wiki.backend.service.BoardService;
+import me.ppangya.wiki.backend.service.board.BoardService;
 import me.ppangya.wiki.test.annotation.IntegrationTransactionalTest;
 import org.junit.Before;
 import org.junit.Test;

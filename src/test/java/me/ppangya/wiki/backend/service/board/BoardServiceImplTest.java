@@ -1,8 +1,8 @@
-package me.ppangya.wiki.backend.service.board.impl;
+package me.ppangya.wiki.backend.service.board;
 
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.entity.Board;
-import me.ppangya.wiki.backend.service.BoardService;
+import me.ppangya.wiki.backend.service.board.BoardService;
 import me.ppangya.wiki.test.annotation.DefaultTransactionalTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;

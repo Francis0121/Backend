@@ -8,8 +8,11 @@ Wiki-Backend Proejct. Based on spring framework.
 	* webmvc
 	* aspects
 	* test
+* Json
+	* com.fasterxml.jackson 2.7.4
 * Database
 	* org.serial.sqlite-jdbc 3.8.11.2
+	* com.h2database 1.4.191
 	* org.apache.tomcat 8.0.20
 	* org.mybatis 3.4.0
 		* org.mybatis.spring 1.3.0
@@ -18,17 +21,23 @@ Wiki-Backend Proejct. Based on spring framework.
 		* org.hibernate 5.1.0.Final
 * Code Quality
 	* lombok 1.16.8
+* Logger : 
+    * Slf4j 1.7.21
+        * jcl-over-slf4j (enable spring log)
+    * Logback 1.1.7
+        * groovy 2.4.6
+* Servlet
+	* servlet-api 2.5
+	* javax.servlet-api 3.1.0
 * Test
 	* Junit 4.12
-		* Logger : 
-		* Slf4j 1.7.21
-	 		* jcl-over-slf4j (enable spring log)
-		* Logback 1.1.7
-			* groovy 2.4.6
+	* Mockito 1.10.19
+		* com.jayway.jsonpath 2.2.0
   		
 ## Database
 
 * [Sqlite](https://www.sqlite.org/)
+* [H2](http://www.h2database.com/html/main.html)
 
 ## Database Template
 
@@ -61,10 +70,12 @@ Use `logback.groovy`.
 
 * me.ppangya.me.backend
 	* controller
-	* facade
+		* function ( such as board, account )
+		* dto
 	* service
+		* function ( such as board, account )
 	* repository
-    * entity
+        * entity
         * function ( such as board, account )
             * jdbc
             * mybatis
