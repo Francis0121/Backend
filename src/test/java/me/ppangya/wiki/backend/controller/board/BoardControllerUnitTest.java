@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
-public class BoardControllerTest {
+public class BoardControllerUnitTest {
 
 	private MockMvc mockMvc;
 

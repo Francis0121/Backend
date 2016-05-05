@@ -1,6 +1,7 @@
 package me.ppangya.wiki.framework.config;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.test.annotation.IntegrationTransactionalTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +16,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RootApplicationConfig.class, DispatcherServletConfig.class})
-@WebAppConfiguration
+@IntegrationTransactionalTest
 public class DispatcherServletConfigTest {
 
 	private @Autowired WebApplicationContext webApplicationContext;
