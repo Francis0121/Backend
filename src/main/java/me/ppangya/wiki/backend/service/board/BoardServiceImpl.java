@@ -1,8 +1,7 @@
-package me.ppangya.wiki.backend.service;
+package me.ppangya.wiki.backend.service.board;
 
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
-import me.ppangya.wiki.backend.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

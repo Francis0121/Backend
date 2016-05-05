@@ -2,7 +2,7 @@ package me.ppangya.wiki.backend.controller.board;
 
 import me.ppangya.wiki.backend.controller.dto.BoardDTO;
 import me.ppangya.wiki.backend.repository.entity.Board;
-import me.ppangya.wiki.backend.service.BoardService;
+import me.ppangya.wiki.backend.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

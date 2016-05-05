@@ -1,4 +1,4 @@
-package me.ppangya.wiki.backend.service;
+package me.ppangya.wiki.backend.service.board;
 
 import me.ppangya.wiki.backend.repository.entity.Board;
 
