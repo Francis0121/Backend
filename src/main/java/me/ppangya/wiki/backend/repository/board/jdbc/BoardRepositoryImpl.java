@@ -41,6 +41,11 @@ public class BoardRepositoryImpl implements BoardRepository {
 	}
 
 	@Override
+	public void delete(Board board) {
+
+	}
+
+	@Override
 	public Optional<Board> findOne(Long id) {
 		return null;
 	}

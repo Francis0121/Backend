@@ -33,5 +33,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 		sqlSessionTemplate.insert("board.insertBoard", board);
 		return board;
 	}
+
+	@Override
+	public void delete(Board board) {
+
+	}
 }
 

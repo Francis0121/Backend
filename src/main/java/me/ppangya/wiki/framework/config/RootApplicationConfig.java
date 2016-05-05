@@ -7,6 +7,7 @@ import me.ppangya.wiki.framework.constant.SystemProperties.ObjectRelationalMappi
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +19,7 @@ import static me.ppangya.wiki.framework.constant.SystemProperties.OBJECT_RELATIO
 @Configuration
 @Import(value = {DataSourceConfig.class, JdbcTransactionMangerConfig.class, MybatisTransactionMangerConfig.class, JpaTransactionMangerConfig.class})
 @PropertySource(value = "classpath:properties/default.properties")
-@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class)})
+@ComponentScan(useDefaultFilters = false, basePackages = {"me.ppangya.wiki.backend.repository", "me.ppangya.wiki.backend.service"}, includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Service.class)})
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class RootApplicationConfig {
 

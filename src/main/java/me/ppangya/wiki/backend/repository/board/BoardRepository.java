@@ -10,4 +10,6 @@ public interface BoardRepository extends Repository<Board, Long>, BoardRepositor
 	Optional<Board> findOne(Long id);
 
 	<S extends Board> Board save(S board);
+
+	void delete(Board board);
 }

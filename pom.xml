@@ -6,7 +6,7 @@
 
     <groupId>me.ppangya.wiki</groupId>
     <artifactId>backend</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <!-- Maven Project Build Setting -->
@@ -21,6 +21,9 @@
 
         <!-- Spring Framework -->
         <org.springframework.version>4.3.0.RC1</org.springframework.version>
+
+        <!-- Json -->
+        <com.fasterxml.jackson.core.version>2.7.4</com.fasterxml.jackson.core.version>
 
         <!-- Lombok -->
         <org.projectlombok.version>1.16.8</org.projectlombok.version>
@@ -46,6 +49,7 @@
 
         <!-- Junit -->
         <org.junit.version>4.12</org.junit.version>
+        <org.mockito.version>1.10.19</org.mockito.version>
     </properties>
 
     <repositories>
@@ -96,6 +100,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+
+        <!-- Json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
         </dependency>
 
         <!-- Lombok -->
@@ -204,6 +215,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${org.springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${org.mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
