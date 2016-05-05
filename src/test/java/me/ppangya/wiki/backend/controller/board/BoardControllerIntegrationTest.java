@@ -45,7 +45,7 @@ public class BoardControllerIntegrationTest {
 		mockMvc.perform(get("/board/" + board.getBoardId()))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("boardId", is(board.getBoardId())))
+			.andExpect(jsonPath("boardId", is(board.getBoardId().intValue())))
 			.andExpect(jsonPath("title", is(board.getTitle())));
 	}
 
