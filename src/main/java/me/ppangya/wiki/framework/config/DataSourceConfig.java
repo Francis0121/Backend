@@ -37,7 +37,7 @@ public class DataSourceConfig {
 	}
 
 	@DatabaseConditional(value = Database.SQLITE)
-	@Bean
+	@Bean(name = "dataSourceInitializer")
 	public DataSourceInitializer sqliteDataSourceInitializer() {
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
 		dataSourceInitializer.setDataSource(sqliteDataSource());
@@ -77,7 +77,7 @@ public class DataSourceConfig {
 
 	@DatabaseConditional(value = Database.H2)
 	@OrmConditional(values = {ObjectRelationalMapping.JDBC, ObjectRelationalMapping.MYBATIS})
-	@Bean
+	@Bean(name = "dataSourceInitializer")
 	public DataSourceInitializer h2DataSourceInitializer() {
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
 		dataSourceInitializer.setDataSource(sqliteDataSource());

@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @OrmConditional(values = SystemProperties.ObjectRelationalMapping.MYBATIS)
 @Configuration
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.repository", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class)})
 public class MybatisTransactionMangerConfig {
 
 	private @Autowired DataSource dataSource;
