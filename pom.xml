@@ -39,6 +39,10 @@
         <org.hibernate.javax.persistence.version>1.0.0.Final</org.hibernate.javax.persistence.version>
         <org.hibernate.version>5.1.0.Final</org.hibernate.version>
 
+        <!-- Validator -->
+        <org.hibernate.validator.version>5.2.4.Final</org.hibernate.validator.version>
+        <javax.el.version>2.2</javax.el.version>
+
         <!-- Logger -->
         <org.slf4j.version>1.7.21</org.slf4j.version>
         <ch.qos.logback.version>1.1.7</ch.qos.logback.version>
@@ -167,6 +171,19 @@
             <version>${org.hibernate.version}</version>
         </dependency>
 
+        <!-- Validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${org.hibernate.validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>${javax.el.version}</version>
+        </dependency>
+
         <!-- Logger -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -270,6 +287,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
+                    <argLine>-Duser.language=en -Duser.region=US</argLine>
                     <systemPropertyVariables>
                         <orm>mybatis</orm>
                         <database>h2</database>
