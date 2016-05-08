@@ -34,7 +34,7 @@ public class MybatisCategoryImplTest {
 	}
 
     @Test
-    public void findTest() {
+    public void findAllTest() {
         saveTest();
         Optional<List<Category>> category = categoryRepository.findAll();
         Assert.assertNotNull(category);
