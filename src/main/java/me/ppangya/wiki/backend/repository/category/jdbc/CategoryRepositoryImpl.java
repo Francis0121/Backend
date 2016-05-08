@@ -47,9 +47,4 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		return null;
 	}
 
-
-//	@Override
-//	public Optional<Board> findOne(Long id) {
-//		return null;
-//	}
 }

@@ -8,8 +8,6 @@ import java.util.Optional;
 
 public interface CategoryRepository extends Repository<Category, Long>, CategoryRepositoryCustom {
 
-//	Optional<Category> findOne(Long id);
-
 	<S extends Category> Category save(S category);
 
 	Optional<List<Category>> findAll();

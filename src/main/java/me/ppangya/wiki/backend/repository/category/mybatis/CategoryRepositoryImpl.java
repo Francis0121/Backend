@@ -22,11 +22,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	private @Autowired SqlSessionTemplate sqlSessionTemplate;
 
-//	@Override
-//	public Optional<Category> findOne(Long id) {
-//		return null;
-//	}
-
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public <S extends Category> Category save(S category) {

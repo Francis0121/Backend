@@ -27,17 +27,4 @@ public class JpaCategoryRepositoryImplTest {
 		Assert.assertNotNull(category);
 	}
 
-//	@Test
-//	public void findOneTest(){
-//		Board board = new Board(null, "Board Title");
-//		board = boardRepository.save(board);
-//
-//		Optional<Board> boardOptional = boardRepository.findOne(board.getBoardId());
-//		Assert.assertNotNull(boardOptional);
-//		Board findBoard = boardOptional.get();
-//		Assert.assertEquals(board.getBoardId(), findBoard.getBoardId());
-//		Assert.assertEquals(board.getTitle(), findBoard.getTitle());
-//		logger.debug("{}", board);
-//	}
-
 }
