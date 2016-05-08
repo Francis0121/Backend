@@ -1,5 +1,6 @@
 package me.ppangya.wiki.backend.repository.category.mybatis;
 
+import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.category.CategoryRepository;
 import me.ppangya.wiki.backend.repository.entity.Category;
 import me.ppangya.wiki.test.annotation.MybatisTransactionalTest;
@@ -14,11 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @MybatisTransactionalTest
 public class MybatisCategoryImplTest {
-
-	private static final Logger logger = LoggerFactory.getLogger(MybatisCategoryImplTest.class);
 
 	private @Autowired CategoryRepository categoryRepository;
 
@@ -29,7 +29,7 @@ public class MybatisCategoryImplTest {
 		Assert.assertNotNull(category);
 		Assert.assertNotNull(category.getCategoryId());
 		Assert.assertNotNull(category.getName());
-		logger.debug("Insert : {}", category);
+		log.debug("Insert : {}", category);
 
 	}
 
