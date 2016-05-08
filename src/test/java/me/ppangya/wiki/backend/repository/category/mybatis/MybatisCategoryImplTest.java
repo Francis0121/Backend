@@ -12,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+
+import static java.util.Optional.empty;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,9 +38,11 @@ public class MybatisCategoryImplTest {
 
     @Test
     public void findAllTest() {
-        saveTest();
-        Optional<List<Category>> category = categoryRepository.findAll();
-        Assert.assertNotNull(category);
+		categoryRepository.save(new Category(null, "Category Name"));
+		Optional<List<Category>> categoryOptional = categoryRepository.findAll();
+		Long count  = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
+		Assert.assertTrue(count > 0);
+		log.debug("Find All : {}", categoryOptional);
     }
 
 
