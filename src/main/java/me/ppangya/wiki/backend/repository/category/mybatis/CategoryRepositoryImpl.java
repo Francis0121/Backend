@@ -31,6 +31,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public Optional<List<Category>> findAll() {
 		List<Category> categoryList = sqlSessionTemplate.selectList("category.findAll");
 		return Optional.ofNullable(categoryList);
