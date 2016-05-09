@@ -271,7 +271,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <orm>jpa</orm>
+                        <orm>mybatis</orm>
                         <database>h2</database>
                     </systemPropertyVariables>
                 </configuration>
@@ -293,6 +293,12 @@
             </plugin>
 
         </plugins>
+
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
     </build>
 
 </project>

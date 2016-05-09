@@ -10,9 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -30,7 +27,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	private static final String FIND_ALL_SQL = "SELECT 'category_id', 'name' FROM CATEGORY";
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public <S extends Category> Category save(S category) {
 		log.debug("Save Parameter : {}", category);
 		KeyHolder keyHolder = new GeneratedKeyHolder();

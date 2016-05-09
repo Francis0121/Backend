@@ -21,8 +21,8 @@ public class MybatisTransactionMangerConfig {
 
 	private @Autowired DataSource dataSource;
 
-	private @Value("database/mybatis/mybatis-config.xml") Resource mybatisConfigResource;
-	private @Value("database/mybatis/${database}/*Mapper.xml") Resource[] mybatisMapperResources;
+	private @Value("classpath:database/mybatis/mybatis-config.xml") Resource mybatisConfigResource;
+	private @Value("classpath:database/mybatis/${database}/*Mapper.xml") Resource[] mybatisMapperResources;
 
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() {

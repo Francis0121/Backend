@@ -7,16 +7,13 @@ import me.ppangya.wiki.test.annotation.MybatisTransactionalTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
-
-import static java.util.Optional.empty;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,14 +33,13 @@ public class MybatisCategoryImplTest {
 
 	}
 
-    @Test
-    public void findAllTest() {
+	@Test
+	public void findAllTest() {
 		categoryRepository.save(new Category(null, "Category Name"));
 		Optional<List<Category>> categoryOptional = categoryRepository.findAll();
-		Long count  = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
+		Long count = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
 		Assert.assertTrue(count > 0);
 		log.debug("Find All : {}", categoryOptional);
-    }
-
+	}
 
 }

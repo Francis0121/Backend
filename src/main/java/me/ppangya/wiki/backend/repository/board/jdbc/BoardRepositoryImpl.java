@@ -10,9 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.Optional;
@@ -24,16 +21,17 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	private @Autowired JdbcTemplate jdbcTemplate;
 
-	private static final String SAVE_SQL = "INSERT INTO BOARD (title) VALUES (?)";
-	private static final String FIND_ONE_SQL = "SELECT * FROM BOARD WHERE board_id = ?";
+	private static final String INSERT_SQL = "INSERT INTO BOARD (title) VALUES (?)";
+	private static final String UPDATE_SQL = "UPDATE BOARD SET title = ? WHERE board_id= ?";
+	private static final String DELETE_SQL = "DELETE FROM BOARD WHERE board_id = ?";
+	private static final String FIND_ONE_SQL = "SELECT board_id, title FROM BOARD WHERE board_id = ?";
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public <S extends Board> Board save(S board) {
 		log.debug("Save Parameter : {}", board);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(connection -> {
-			PreparedStatement ps = connection.prepareStatement(SAVE_SQL, new String[]{"board_id"});
+			PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{"board_id"});
 			ps.setString(1, board.getTitle());
 			return ps;
 		}, keyHolder);

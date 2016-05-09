@@ -42,6 +42,7 @@ public class BoardControllerIntegrationTest {
 	public void getBoard() throws Exception {
 		Board board = boardService.insertBoard("Sample Title");
 
+		log.info(board.toString());
 		mockMvc.perform(get("/board/" + board.getBoardId()))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -75,15 +76,15 @@ public class BoardControllerIntegrationTest {
 			.content(request))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(jsonPath("boardId", notNullValue()))
+			.andExpect(jsonPath("boardId", is(board.getBoardId().intValue())))
 			.andExpect(jsonPath("title", is(boardDTO.getTitle())));
 	}
 
-	@Test
+	@Test(expected = Exception.class)
 	public void deleteBoard() throws Exception {
 		Board board = boardService.insertBoard("Sample Title");
-
 		mockMvc.perform(delete("/board/" + board.getBoardId())).andExpect(status().isOk());
+		boardService.selectOneByBoardId(board.getBoardId());
 	}
 
 }

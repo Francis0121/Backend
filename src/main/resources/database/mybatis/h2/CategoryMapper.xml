@@ -8,7 +8,10 @@
         VALUES
           (#{name})
         <selectKey keyProperty="categoryId" resultType="Long">
-            SELECT last_insert_rowid()
+            SELECT CURRENT_VALUE
+            FROM information_schema.sequences
+            WHERE sequence_schema = 'PUBLIC'
+            AND sequence_name = 'CATEGORY_SEQ'
         </selectKey>
     </insert>
 

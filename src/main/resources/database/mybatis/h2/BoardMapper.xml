@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-    <insert id="insertBoard" parameterType="me.ppangya.wiki.backend.repository.entity.Board">
-        INSERT INTO BOARD ( title ) VALUES ( #{title} )
+    <insert id="insert" parameterType="me.ppangya.wiki.backend.repository.entity.Board">
+        INSERT INTO BOARD ( `title` ) VALUES ( #{title} )
         <selectKey keyProperty="boardId" resultType="Long">
             SELECT CURRENT_VALUE
             FROM information_schema.sequences
@@ -11,4 +11,30 @@
             AND sequence_name = 'BOARD_SEQ'
         </selectKey>
     </insert>
+
+    <update id="update" parameterType="me.ppangya.wiki.backend.repository.entity.Board">
+        UPDATE
+          BOARD
+        SET
+          `title` = #{title}
+        WHERE
+          `board_id` = #{boardId}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM
+          BOARD
+        WHERE
+          `board_id` = #{id}
+    </delete>
+
+    <select id="findOne" parameterType="Long" resultType="me.ppangya.wiki.backend.repository.entity.Board">
+        SELECT
+          `board_id` AS boardId, `title`
+        FROM
+          BOARD
+        WHERE
+          `board_id` = #{id}
+    </select>
+
 </mapper>
