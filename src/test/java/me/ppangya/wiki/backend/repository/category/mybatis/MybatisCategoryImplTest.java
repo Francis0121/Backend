@@ -40,6 +40,15 @@ public class MybatisCategoryImplTest {
 		Long count = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
 		Assert.assertTrue(count > 0);
 		log.debug("Find All : {}", categoryOptional);
+		}
+
+	@Test
+	public void updateTest() {
+		saveTest();
+		Category updateCategory = new Category((long) 1, "new name");
+		categoryRepository.update(updateCategory);
+		findAllTest();
 	}
+
 
 }

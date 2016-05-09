@@ -11,4 +11,6 @@ public interface CategoryRepository extends Repository<Category, Long>, Category
 	<S extends Category> Category save(S category);
 
 	Optional<List<Category>> findAll();
+
+	void update(Category category);
 }

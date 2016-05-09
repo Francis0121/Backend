@@ -19,4 +19,13 @@
           CATEGORY
     </select>
 
+    <update id="update" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
+        UPDATE
+          CATEGORY
+        SET
+          'name'=(#{name})
+        WHERE
+          'category_id'=(#{categoryId})
+    </update>
+
 </mapper>
