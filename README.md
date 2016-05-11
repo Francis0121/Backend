@@ -7,11 +7,14 @@ PreRelease - 16.05.11 - v1.0.5
 
 ## Enabled
 
-orm | database
----- | ----
-mybatis | h2
-mybatis | sqlite
-jpa | h2
+orm | database | support
+---- | ---- | ----
+mybatis | h2 | o
+mybatis | sqlite | o
+jdbc | h2 | o
+jdbc | sqlite | o
+jpa | h2 | o
+jpa | sqlite | x
 
 # Java Vm option
 `-Dorm=jpa -Ddatabase=h2 -Duser.region=US -Duser.language=en`
