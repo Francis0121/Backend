@@ -3,7 +3,7 @@
 Wiki-Backend Proejct. Based on spring framework.
 
 ## Release History
-PreRelease 16.05.11 1.0.5
+PreRelease - 16.05.11 - v1.0.5
 
 ## Enabled
 
