@@ -6,7 +6,7 @@
 
     <groupId>me.ppangya.wiki</groupId>
     <artifactId>backend</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>war</packaging>
 
     <properties>
@@ -289,7 +289,7 @@
                 <configuration>
                     <argLine>-Duser.language=en -Duser.region=US</argLine>
                     <systemPropertyVariables>
-                        <orm>mybatis</orm>
+                        <orm>jpa</orm>
                         <database>h2</database>
                     </systemPropertyVariables>
                 </configuration>

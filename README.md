@@ -2,6 +2,17 @@
 
 Wiki-Backend Proejct. Based on spring framework.
 
+## Release History
+PreRelease 16.05.11 1.0.5
+
+## Enabled
+
+orm | database
+---- | ----
+mybatis | h2
+mybatis | sqlite
+jpa | h2
+
 # Java Vm option
 `-Dorm=jpa -Ddatabase=h2 -Duser.region=US -Duser.language=en`
 
@@ -81,6 +92,7 @@ Use `logback.groovy`.
 	* controller
 		* function ( such as board, account )
 		* dto
+	* exception
 	* service
 		* function ( such as board, account )
 	* repository
