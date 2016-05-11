@@ -13,4 +13,4 @@ logger('org.hibernate', WARN, ['console'], false)
 logger('org.hibernate.type.descriptor.sql.BasicBinder', TRACE, ['console'], false)
 logger('org.hibernate.type.descriptor.sql.BasicExtractor', TRACE, ['console'], false)
 
-root(INFO, ['console'])
+root(ERROR, ['console'])

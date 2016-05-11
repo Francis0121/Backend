@@ -8,9 +8,6 @@ import me.ppangya.wiki.framework.constant.SystemProperties;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,21 +19,26 @@ public class BoardRepositoryImpl implements BoardRepository {
 	private @Autowired SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public Optional<Board> findOne(Long id) {
-		return null;
-	}
-
-	@Override
-	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public <S extends Board> Board save(S board) {
-		log.debug("Save Parameter : {}", board.toString());
-		sqlSessionTemplate.insert("board.insertBoard", board);
-		return board;
+		// TODO : Refactoring
+		Optional<Board> boardOptional = this.findOne(board.getBoardId());
+		Board findBoard = boardOptional.orElseGet(() -> {
+			sqlSessionTemplate.insert("board.insert", board);
+			return board;
+		});
+		findBoard.setTitle(board.getTitle());
+		sqlSessionTemplate.update("board.update", findBoard);
+		return findBoard;
 	}
 
 	@Override
 	public void delete(Board board) {
+		sqlSessionTemplate.delete("board.delete", board.getBoardId());
+	}
 
+	@Override
+	public Optional<Board> findOne(Long id) {
+		return Optional.ofNullable(sqlSessionTemplate.selectOne("board.findOne", id));
 	}
 }
 

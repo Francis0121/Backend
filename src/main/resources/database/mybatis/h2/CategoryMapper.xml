@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+
+    <insert id="insert" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
+        INSERT INTO
+          CATEGORY ( `name` )
+        VALUES
+          (#{name})
+        <selectKey keyProperty="categoryId" resultType="Long">
+            SELECT CURRENT_VALUE
+            FROM information_schema.sequences
+            WHERE sequence_schema = 'PUBLIC'
+            AND sequence_name = 'CATEGORY_SEQ'
+        </selectKey>
+    </insert>
+
+    <select id="findAll" resultType="me.ppangya.wiki.backend.repository.entity.Category">
+        SELECT
+          `category_id` AS categoryId, `name`
+        FROM
+          CATEGORY
+    </select>
+
+</mapper>

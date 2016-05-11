@@ -1,18 +1,28 @@
 package me.ppangya.wiki.backend.controller.board;
 
+import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.controller.dto.BoardDTO;
+import me.ppangya.wiki.backend.exception.RestApiException;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.backend.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+@Slf4j
 @RestController
 public class BoardController {
 
 	private @Autowired BoardService boardService;
 
 	@PostMapping(value = "/board")
-	public Board postBoard(@RequestBody BoardDTO boardDTO) {
+	public Board postBoard(@Valid @RequestBody BoardDTO boardDTO, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			throw new RestApiException(HttpStatus.BAD_REQUEST, bindingResult);
+		}
 		return boardService.insertBoard(boardDTO.getTitle());
 	}
 

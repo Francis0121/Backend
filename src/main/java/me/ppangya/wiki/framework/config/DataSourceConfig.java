@@ -25,7 +25,7 @@ public class DataSourceConfig {
 	private @Value("${me.ppangya.wiki.sqlite.jdbc.url}") String sqliteUrl;
 	private @Value("${me.ppangya.wiki.sqlite.jdbc.initializer.enabled}") Boolean sqliteInitializerEnabled;
 
-	private @Value("database/scheme/sqlite_init.sql") Resource sqliteInitDatabaseResource;
+	private @Value("classpath:database/scheme/sqlite_init.sql") Resource sqliteInitDatabaseResource;
 
 	@DatabaseConditional(value = Database.SQLITE)
 	@Bean(name = "dataSource", destroyMethod = "close")
@@ -62,7 +62,7 @@ public class DataSourceConfig {
 	private @Value("${me.ppangya.wiki.h2.jdbc.password}") String h2Password;
 	private @Value("${me.ppangya.wiki.h2.jdbc.initializer.enabled}") Boolean h2InitializerEnabled;
 
-	private @Value("database/scheme/h2_init.sql") Resource h2InitDatabaseResource;
+	private @Value("classpath:database/scheme/h2_init.sql") Resource h2InitDatabaseResource;
 
 	@DatabaseConditional(value = Database.H2)
 	@Bean(name = "dataSource", destroyMethod = "close")

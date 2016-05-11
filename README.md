@@ -1,6 +1,23 @@
 # Wiki-Backend
 
 Wiki-Backend Proejct. Based on spring framework.
+
+## Release History
+PreRelease - 16.05.11 - v1.0.5
+
+## Enabled
+
+orm | database
+---- | ----
+mybatis | h2
+mybatis | sqlite
+jpa | h2
+
+# Java Vm option
+`-Dorm=jpa -Ddatabase=h2 -Duser.region=US -Duser.language=en`
+
+# Library
+
 * Spring Framework 4.3.0.RC1
 	* core
 	* jdbc
@@ -19,6 +36,9 @@ Wiki-Backend Proejct. Based on spring framework.
 	* spring.data.jpa 1.10.1.RELEASE
 		* org.hibernate.javax.persistence 1.0.0.Final
 		* org.hibernate 5.1.0.Final
+* Validator
+	* org.hibernate.validator 5.2.4.Final
+	* javax.el 2.2
 * Code Quality
 	* lombok 1.16.8
 * Logger : 
@@ -72,6 +92,7 @@ Use `logback.groovy`.
 	* controller
 		* function ( such as board, account )
 		* dto
+	* exception
 	* service
 		* function ( such as board, account )
 	* repository
