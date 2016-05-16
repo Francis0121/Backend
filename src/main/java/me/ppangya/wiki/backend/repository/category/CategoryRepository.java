@@ -12,5 +12,7 @@ public interface CategoryRepository extends Repository<Category, Long>, Category
 
 	Optional<List<Category>> findAll();
 
-	void update(Category category);
+	Optional<Category> findOne(Long categoryId);
+
+	void delete(Category category);
 }

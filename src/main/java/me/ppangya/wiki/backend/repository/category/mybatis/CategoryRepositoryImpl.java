@@ -36,9 +36,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
-	public void update(Category category) {
-		sqlSessionTemplate.update("category.update", category);
+	public Optional<Category> findOne(Long categoryId) {
+		return null;
+	}
+
+	@Override
+	public void delete(Category category) {
+
 	}
 
 }
