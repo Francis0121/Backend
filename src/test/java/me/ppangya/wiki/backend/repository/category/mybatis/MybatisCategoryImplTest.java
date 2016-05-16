@@ -42,13 +42,13 @@ public class MybatisCategoryImplTest {
 		log.debug("Find All : {}", categoryOptional);
 		}
 
-	@Test
-	public void updateTest() {
-		saveTest();
-		Category updateCategory = new Category((long) 1, "new name");
-		categoryRepository.update(updateCategory);
-		findAllTest();
-	}
+//	@Test
+//	public void updateTest() {
+//		saveTest();
+//		Category updateCategory = new Category((long) 1, "new name");
+//		categoryRepository.update(updateCategory);
+//		findAllTest();
+//	}
 
 
 }
