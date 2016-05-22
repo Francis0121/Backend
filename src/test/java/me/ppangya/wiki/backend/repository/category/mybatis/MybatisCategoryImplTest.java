@@ -36,11 +36,35 @@ public class MybatisCategoryImplTest {
 	@Test
 	public void findAllTest() {
 		categoryRepository.save(new Category(null, "Category Name"));
+        categoryRepository.save(new Category(null, "Category Name2"));
 		Optional<List<Category>> categoryOptional = categoryRepository.findAll();
 		Long count = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
 		Assert.assertTrue(count > 0);
 		log.debug("Find All : {}", categoryOptional);
 		}
+
+	@Test
+	public void findOneTest() {
+		Category category = categoryRepository.save(new Category(null, "name"));
+		Long categoryId = category.getCategoryId();
+
+		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
+		Category findCategory = categoryOptional.orElse(null);
+		Assert.assertNotNull(findCategory);
+        Assert.assertEquals(categoryId, findCategory.getCategoryId());
+        log.debug("findOne : {}", findCategory);
+    }
+
+	@Test
+	public void deleteTest() {
+		Category category = categoryRepository.save(new Category(null, "name"));
+		Long categoryId = category.getCategoryId();
+		categoryRepository.delete(category);
+
+		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
+		Category findCategory = categoryOptional.orElse(null);
+		Assert.assertNull(findCategory);
+	}
 
 //	@Test
 //	public void updateTest() {

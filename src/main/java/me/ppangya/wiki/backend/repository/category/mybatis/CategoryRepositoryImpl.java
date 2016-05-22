@@ -24,9 +24,14 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	@Override
 	public <S extends Category> Category save(S category) {
-		log.debug("Save Parameter : {}", category.toString());
-		sqlSessionTemplate.insert("category.insert", category);
-		return category;
+		Optional<Category> categoryOptional = findOne(category.getCategoryId());
+		Category findCategory = categoryOptional.orElseGet(() -> {
+			sqlSessionTemplate.insert("category.insert", category);
+			return category;
+		});
+		findCategory.setName(category.getName());
+		sqlSessionTemplate.update("category.update", findCategory);
+		return findCategory;
 	}
 
 	@Override
@@ -37,12 +42,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	@Override
 	public Optional<Category> findOne(Long categoryId) {
-		return null;
+		return Optional.ofNullable(sqlSessionTemplate.selectOne("category.findOne", categoryId));
 	}
 
 	@Override
 	public void delete(Category category) {
-
+		Optional<Category> categoryOptional = findOne(category.getCategoryId());
+		categoryOptional.ifPresent(findCategory -> sqlSessionTemplate.delete("category.delete", category.getCategoryId()));
 	}
 
 }

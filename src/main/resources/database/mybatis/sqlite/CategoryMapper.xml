@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">
 
-    <insert id="insert" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
+    <insert id="insert" parameterType="Category">
         INSERT INTO
           CATEGORY ( `name` )
         VALUES
@@ -12,20 +12,36 @@
         </selectKey>
     </insert>
 
-    <select id="findAll" resultType="me.ppangya.wiki.backend.repository.entity.Category">
+    <select id="findAll" resultType="Category">
         SELECT
           `category_id` AS categoryId, `name`
         FROM
           CATEGORY
     </select>
 
-    <update id="update" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
+    <update id="update" parameterType="Category">
         UPDATE
           CATEGORY
         SET
-          'name'=(#{name})
+          `name`=(#{name})
         WHERE
-          'category_id'=(#{categoryId})
+          `category_id`=(#{categoryId})
     </update>
+
+    <select id="findOne" parameterType="Long" resultType="Category">
+        SELECT
+          `category_id` AS categoryId, `name`
+        FROM
+          CATEGORY
+        WHERE
+          `category_id` = #{categoryId}
+    </select>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM
+          CATEGORY
+        WHERE
+          `category_id` = #{categoryId}
+    </delete>
 
 </mapper>
