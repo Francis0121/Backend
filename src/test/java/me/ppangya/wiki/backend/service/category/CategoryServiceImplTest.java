@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.service.category;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.entity.Category;
 import me.ppangya.wiki.test.annotation.DefaultTransactionalTest;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class CategoryServiceImplTest {
 		assertThat(updateCategory.getName(), is("Modify Category"));
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ResourceNotFoundException.class)
 	public void deleteCategoryTest() {
 		Category category = categoryService.insertCategory(new Category(null, "New Category"));
 		Long categoryId = category.getCategoryId();

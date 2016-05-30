@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.service.category;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.category.CategoryRepository;
 import me.ppangya.wiki.backend.repository.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public Category updateCategory(Long categoryId, String name) {
 		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
-		Category category = categoryOptional.orElseThrow(RuntimeException::new);
+		Category category = categoryOptional.orElseThrow(() -> new ResourceNotFoundException("categoryId={}", categoryId));
 		category.setName(name);
 		return categoryRepository.save(category);
 	}
@@ -42,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public Category selectOneByCategoryId(Long categoryId) {
-		return categoryRepository.findOne(categoryId).orElseThrow(RuntimeException::new);
+		return categoryRepository.findOne(categoryId)
+			.orElseThrow(() -> new ResourceNotFoundException("categoryId={}", categoryId));
 	}
 }

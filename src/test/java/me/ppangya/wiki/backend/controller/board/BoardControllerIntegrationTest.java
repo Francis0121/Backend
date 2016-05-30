@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.controller.dto.BoardDTO;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.backend.service.board.BoardService;
 import me.ppangya.wiki.test.annotation.IntegrationTransactionalTest;
@@ -110,7 +111,7 @@ public class BoardControllerIntegrationTest {
 			.andExpect(jsonPath("title", is(boardDTO.getTitle())));
 	}
 
-	@Test(expected = Exception.class)
+	@Test(expected = ResourceNotFoundException.class)
 	public void deleteBoard() throws Exception {
 		Board board = boardService.insertBoard("Sample Title");
 		mockMvc.perform(delete("/board/" + board.getBoardId())).andExpect(status().isOk());

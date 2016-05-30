@@ -1,5 +1,6 @@
 package me.ppangya.wiki.backend.service.board;
 
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public Board updateBoard(Long boardId, String title) {
 		Optional<Board> boardOptional = boardRepository.findOne(boardId);
-		Board board = boardOptional.orElseThrow(RuntimeException::new);
+		Board board = boardOptional.orElseThrow(() -> new ResourceNotFoundException("boardId={}", boardId));
 		board.setTitle(title);
 		return boardRepository.save(board);
 	}
@@ -40,6 +41,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public Board selectOneByBoardId(Long boardId) {
-		return boardRepository.findOne(boardId).orElseThrow(RuntimeException::new);
+		return boardRepository.findOne(boardId).orElseThrow(() -> new ResourceNotFoundException("boardId={}", boardId));
 	}
 }
