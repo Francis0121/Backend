@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.repository.category.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.category.CategoryRepository;
 import me.ppangya.wiki.backend.repository.entity.Category;
 import me.ppangya.wiki.framework.annotation.OrmConditional;
@@ -61,7 +62,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		try {
 			category = jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{categoryId}, new CategoryMapper());
 		} catch (EmptyResultDataAccessException e) {
-			log.debug("category is not found");
+			throw new ResourceNotFoundException("categoryId={}", categoryId);
 		}
 		return Optional.ofNullable(category);
 	}

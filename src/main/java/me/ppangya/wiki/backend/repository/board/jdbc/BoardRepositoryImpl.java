@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.repository.board.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.framework.annotation.OrmConditional;
@@ -57,7 +58,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 		try {
 			board = jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{boardId}, new BeanPropertyRowMapper<>(Board.class));
 		} catch (EmptyResultDataAccessException e) {
-			log.debug("board is not found");
+			throw new ResourceNotFoundException("boardId={}", boardId);
 		}
 		return Optional.ofNullable(board);
 	}
