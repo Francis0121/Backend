@@ -2,6 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias type="me.ppangya.wiki.backend.repository.entity.Board" alias="Board" />
         <typeAlias type="me.ppangya.wiki.backend.repository.entity.Category" alias="Category" />
     </typeAliases>
 </configuration>
