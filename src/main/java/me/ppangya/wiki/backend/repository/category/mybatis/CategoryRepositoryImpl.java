@@ -8,6 +8,9 @@ import me.ppangya.wiki.framework.constant.SystemProperties;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,15 +24,31 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	@Override
 	public <S extends Category> Category save(S category) {
-		log.debug("Save Parameter : {}", category.toString());
-		sqlSessionTemplate.insert("category.insert", category);
-		return category;
+		Optional<Category> categoryOptional = findOne(category.getCategoryId());
+		Category findCategory = categoryOptional.orElseGet(() -> {
+			sqlSessionTemplate.insert("category.insert", category);
+			return category;
+		});
+		findCategory.setName(category.getName());
+		sqlSessionTemplate.update("category.update", findCategory);
+		return findCategory;
 	}
 
 	@Override
 	public Optional<List<Category>> findAll() {
 		List<Category> categoryList = sqlSessionTemplate.selectList("category.findAll");
 		return Optional.ofNullable(categoryList);
+	}
+
+	@Override
+	public Optional<Category> findOne(Long categoryId) {
+		return Optional.ofNullable(sqlSessionTemplate.selectOne("category.findOne", categoryId));
+	}
+
+	@Override
+	public void delete(Category category) {
+		Optional<Category> categoryOptional = findOne(category.getCategoryId());
+		categoryOptional.ifPresent(findCategory -> sqlSessionTemplate.delete("category.delete", category.getCategoryId()));
 	}
 
 }
