@@ -26,17 +26,17 @@ public class BoardController {
 		return boardService.insertBoard(boardDTO.getTitle());
 	}
 
-	@GetMapping(value = "/board/{boardId}")
+	@GetMapping(value = "/board/{boardId:^[1-9]\\d*$}")
 	public Board getBoard(@PathVariable Long boardId) {
 		return boardService.selectOneByBoardId(boardId);
 	}
 
-	@PutMapping(value = "/board/{boardId}")
+	@PutMapping(value = "/board/{boardId:^[1-9]\\d*$}")
 	public Board putBoard(@PathVariable Long boardId, @RequestBody BoardDTO boardDTO) {
 		return boardService.updateBoard(boardId, boardDTO.getTitle());
 	}
 
-	@DeleteMapping(value = "/board/{boardId}")
+	@DeleteMapping(value = "/board/{boardId:^[1-9]\\d*$}")
 	public void deleteBoard(@PathVariable Long boardId) {
 		boardService.deleteBoard(boardId);
 	}
