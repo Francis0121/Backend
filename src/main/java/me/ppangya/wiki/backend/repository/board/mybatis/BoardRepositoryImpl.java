@@ -20,7 +20,6 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	public <S extends Board> Board save(S board) {
-		// TODO : Refactoring
 		Optional<Board> boardOptional = this.findOne(board.getBoardId());
 		Board findBoard = boardOptional.orElseGet(() -> {
 			sqlSessionTemplate.insert("board.insert", board);
