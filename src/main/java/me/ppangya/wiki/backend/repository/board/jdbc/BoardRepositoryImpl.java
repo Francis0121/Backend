@@ -31,8 +31,8 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	public <S extends Board> Board save(S board) {
-		Optional<Board> boardOptional = findOne(board.getBoardId());
-		Board findBoard = boardOptional.orElseGet(() -> {
+		Long boardId = board.getBoardId();
+		if (boardId == null) {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(connection -> {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{"board_id"});
@@ -40,10 +40,13 @@ public class BoardRepositoryImpl implements BoardRepository {
 				return ps;
 			}, keyHolder);
 			return new Board(keyHolder.getKey().longValue(), board.getTitle());
-		});
-		findBoard.setTitle(board.getTitle());
-		jdbcTemplate.update(UPDATE_SQL, findBoard.getTitle(), findBoard.getBoardId());
-		return findBoard;
+		} else {
+			Optional<Board> boardOptional = findOne(boardId);
+			Board findBoard = boardOptional.orElseThrow(() -> new ResourceNotFoundException("boardId={}", boardId));
+			findBoard.setTitle(board.getTitle());
+			jdbcTemplate.update(UPDATE_SQL, findBoard.getTitle(), findBoard.getBoardId());
+			return findBoard;
+		}
 	}
 
 	@Override
@@ -54,12 +57,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	public Optional<Board> findOne(Long boardId) {
-		Board board = null;
 		try {
-			board = jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{boardId}, new BeanPropertyRowMapper<>(Board.class));
+			return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{boardId}, new BeanPropertyRowMapper<>(Board.class)));
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("boardId={}", boardId);
 		}
-		return Optional.ofNullable(board);
 	}
 }

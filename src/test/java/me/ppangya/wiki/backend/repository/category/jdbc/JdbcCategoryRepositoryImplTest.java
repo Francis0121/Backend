@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.repository.category.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.category.CategoryRepository;
 import me.ppangya.wiki.backend.repository.entity.Category;
 import me.ppangya.wiki.test.annotation.JdbcTransactionalTest;
@@ -61,14 +62,12 @@ public class JdbcCategoryRepositoryImplTest {
 		Assert.assertEquals(categoryId, category.getCategoryId());
 	}
 
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void deleteTest() {
 		Category category = categoryRepository.save(new Category(null, "name"));
 		Long categoryId = category.getCategoryId();
 		categoryRepository.delete(category);
 
-		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
-		Category findCategory = categoryOptional.orElse(null);
-		Assert.assertNull(findCategory);
+		categoryRepository.findOne(categoryId);
 	}
 }

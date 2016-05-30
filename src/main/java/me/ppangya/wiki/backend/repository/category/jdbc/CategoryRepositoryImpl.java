@@ -9,14 +9,11 @@ import me.ppangya.wiki.framework.constant.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +32,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	@Override
 	public <S extends Category> Category save(S category) {
-		Optional<Category> categoryOptional = findOne(category.getCategoryId());
-		Category findCategory = categoryOptional.orElseGet(() -> {
+		Long categoryId = category.getCategoryId();
+		if (categoryId == null) {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(connection -> {
 				PreparedStatement ps = connection.prepareStatement(SAVE_SQL, new String[]{"name"});
@@ -44,27 +41,33 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 				return ps;
 			}, keyHolder);
 			return new Category(keyHolder.getKey().longValue(), category.getName());
-		});
-		findCategory.setName(category.getName());
-		jdbcTemplate.update(UPDATE_SQL, findCategory.getName(), findCategory.getCategoryId());
-		return findCategory;
+
+		} else {
+			Optional<Category> categoryOptional = findOne(categoryId);
+			Category findCategory = categoryOptional.orElseThrow(() -> new ResourceNotFoundException("categoryId={}", categoryId));
+			findCategory.setName(category.getName());
+			jdbcTemplate.update(UPDATE_SQL, findCategory.getName(), findCategory.getCategoryId());
+			return findCategory;
+		}
 	}
 
 	@Override
 	public Optional<List<Category>> findAll() {
-		List<Category> categoryList = jdbcTemplate.query(FIND_ALL_SQL, new CategoryMapper());
+		List<Category> categoryList = jdbcTemplate.query(FIND_ALL_SQL, (rs, rowNum) -> {
+			return new Category(rs.getLong("category_id"), rs.getString("name"));
+		});
 		return Optional.ofNullable(categoryList);
 	}
 
 	@Override
 	public Optional<Category> findOne(Long categoryId) {
-		Category category = null;
 		try {
-			category = jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{categoryId}, new CategoryMapper());
+			return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_ONE_SQL, new Object[]{categoryId}, (rs, rowNum) -> {
+				return new Category(rs.getLong("category_id"), rs.getString("name"));
+			}));
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("categoryId={}", categoryId);
 		}
-		return Optional.ofNullable(category);
 	}
 
 	@Override
@@ -72,16 +75,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		Optional<Category> categoryOptional = findOne(category.getCategoryId());
 		categoryOptional.ifPresent(findCategory -> jdbcTemplate.update(DELETE_SQL, category.getCategoryId()));
 	}
-
-	private static final class CategoryMapper implements RowMapper<Category> {
-		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Category category = new Category();
-			category.setCategoryId((long) rs.getInt("category_id"));
-			category.setName(rs.getString("name"));
-			return category;
-		}
-	}
-
 }
 
 

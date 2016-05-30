@@ -1,6 +1,7 @@
 package me.ppangya.wiki.backend.repository.board.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ppangya.wiki.backend.exception.ResourceNotFoundException;
 import me.ppangya.wiki.backend.repository.board.BoardRepository;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.test.annotation.JdbcTransactionalTest;
@@ -57,7 +58,7 @@ public class JdbcBoardRepositoryImplTest {
 		Assert.assertEquals(initBoard.getTitle(), board.getTitle());
 	}
 
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void deleteTest() {
 		Board board = boardRepository.save(initBoard);
 		Long boardId = board.getBoardId();
