@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.Location;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
@@ -30,20 +29,18 @@ public class JdbcCategoryRepositoryImplTest {
 		Assert.assertNotNull(category);
 		Assert.assertNotNull(category.getCategoryId());
 		Assert.assertNotNull(category.getName());
-		log.debug("Insert : {}", category);
 	}
 
-    @Test
-    public void saveTest_update() {
-        Category category = categoryRepository.save(new Category(null, "origin"));
-        category.setName("change");
+	@Test
+	public void saveTest_update() {
+		Category category = categoryRepository.save(new Category(null, "origin"));
+		category.setName("change");
 
-        Category modifyCategory = categoryRepository.save(category);
-        Assert.assertNotNull(modifyCategory);
-        Assert.assertEquals(category.getCategoryId(), modifyCategory.getCategoryId());
-        Assert.assertEquals(category.getName(), modifyCategory.getName());
-        log.debug("update : {} ", modifyCategory);
-    }
+		Category modifyCategory = categoryRepository.save(category);
+		Assert.assertNotNull(modifyCategory);
+		Assert.assertEquals(category.getCategoryId(), modifyCategory.getCategoryId());
+		Assert.assertEquals(category.getName(), modifyCategory.getName());
+	}
 
 	@Test
 	public void findAllTest() {
@@ -52,7 +49,6 @@ public class JdbcCategoryRepositoryImplTest {
 		Optional<List<Category>> categoryOptional = categoryRepository.findAll();
 		Long count = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
 		Assert.assertTrue(count > 0);
-		log.debug("Find All : {}", categoryOptional);
 	}
 
 	@Test
@@ -63,17 +59,16 @@ public class JdbcCategoryRepositoryImplTest {
 		Category category = categoryOptional.orElse(null);
 		Assert.assertNotNull(category);
 		Assert.assertEquals(categoryId, category.getCategoryId());
-        log.debug("find one : {}", category);
 	}
 
-    @Test
-    public void deleteTest() {
-        Category category = categoryRepository.save(new Category(null, "name"));
-        Long categoryId = category.getCategoryId();
-        categoryRepository.delete(category);
+	@Test
+	public void deleteTest() {
+		Category category = categoryRepository.save(new Category(null, "name"));
+		Long categoryId = category.getCategoryId();
+		categoryRepository.delete(category);
 
-        Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
-        Category findCategory = categoryOptional.orElse(null);
-        Assert.assertNull(findCategory);
-    }
+		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
+		Category findCategory = categoryOptional.orElse(null);
+		Assert.assertNull(findCategory);
+	}
 }

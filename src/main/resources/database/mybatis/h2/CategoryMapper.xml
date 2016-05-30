@@ -4,9 +4,9 @@
 
     <insert id="insert" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
         INSERT INTO
-          CATEGORY ( `name` )
+        CATEGORY ( `name` )
         VALUES
-          (#{name})
+        (#{name})
         <selectKey keyProperty="categoryId" resultType="Long">
             SELECT CURRENT_VALUE
             FROM information_schema.sequences
@@ -14,6 +14,32 @@
             AND sequence_name = 'CATEGORY_SEQ'
         </selectKey>
     </insert>
+
+    <update id="update" parameterType="me.ppangya.wiki.backend.repository.entity.Category">
+        UPDATE
+          CATEGORY
+        SET
+          `name` = #{name}
+        WHERE
+          `category_id` = #{categoryId}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE
+        FROM
+          CATEGORY
+        WHERE
+          `category_id` = #{value}
+    </delete>
+
+    <select id="findOne" parameterType="Long" resultType="me.ppangya.wiki.backend.repository.entity.Category">
+        SELECT
+          `category_id` AS categoryId, `name`
+        FROM
+          CATEGORY
+        WHERE
+          `category_id` = #{value}
+    </select>
 
     <select id="findAll" resultType="me.ppangya.wiki.backend.repository.entity.Category">
         SELECT

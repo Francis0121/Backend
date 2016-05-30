@@ -8,8 +8,6 @@ import static me.ppangya.wiki.framework.constant.SystemProperties.ObjectRelation
 
 public interface Environment {
 
-	String CHAR_SET = "UTF-8";
-
 	List<SystemProperties.ObjectRelationalMapping> OBJECT_RELATIONAL_MAPPING_LIST = Arrays.asList(ObjectRelationalMapping
 		.values());
 

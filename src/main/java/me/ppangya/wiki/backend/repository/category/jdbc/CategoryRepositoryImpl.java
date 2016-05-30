@@ -1,6 +1,5 @@
 package me.ppangya.wiki.backend.repository.category.jdbc;
 
-import com.oracle.tools.packager.Log;
 import lombok.extern.slf4j.Slf4j;
 import me.ppangya.wiki.backend.repository.category.CategoryRepository;
 import me.ppangya.wiki.backend.repository.entity.Category;
@@ -8,15 +7,11 @@ import me.ppangya.wiki.framework.annotation.OrmConditional;
 import me.ppangya.wiki.framework.constant.SystemProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,10 +50,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	}
 
 	@Override
-	@Transactional(readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public Optional<List<Category>> findAll() {
 		List<Category> categoryList = jdbcTemplate.query(FIND_ALL_SQL, new CategoryMapper());
-		log.debug("find : {}", categoryList);
 		return Optional.ofNullable(categoryList);
 	}
 

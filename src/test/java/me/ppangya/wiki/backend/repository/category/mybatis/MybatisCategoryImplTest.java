@@ -29,19 +29,16 @@ public class MybatisCategoryImplTest {
 		Assert.assertNotNull(category);
 		Assert.assertNotNull(category.getCategoryId());
 		Assert.assertNotNull(category.getName());
-		log.debug("Insert : {}", category);
-
 	}
 
 	@Test
 	public void findAllTest() {
 		categoryRepository.save(new Category(null, "Category Name"));
-        categoryRepository.save(new Category(null, "Category Name2"));
+		categoryRepository.save(new Category(null, "Category Name2"));
 		Optional<List<Category>> categoryOptional = categoryRepository.findAll();
 		Long count = categoryOptional.map(Collection::stream).orElse(Stream.<Category>empty()).count();
 		Assert.assertTrue(count > 0);
-		log.debug("Find All : {}", categoryOptional);
-		}
+	}
 
 	@Test
 	public void findOneTest() {
@@ -51,9 +48,8 @@ public class MybatisCategoryImplTest {
 		Optional<Category> categoryOptional = categoryRepository.findOne(categoryId);
 		Category findCategory = categoryOptional.orElse(null);
 		Assert.assertNotNull(findCategory);
-        Assert.assertEquals(categoryId, findCategory.getCategoryId());
-        log.debug("findOne : {}", findCategory);
-    }
+		Assert.assertEquals(categoryId, findCategory.getCategoryId());
+	}
 
 	@Test
 	public void deleteTest() {
@@ -65,14 +61,5 @@ public class MybatisCategoryImplTest {
 		Category findCategory = categoryOptional.orElse(null);
 		Assert.assertNull(findCategory);
 	}
-
-//	@Test
-//	public void updateTest() {
-//		saveTest();
-//		Category updateCategory = new Category((long) 1, "new name");
-//		categoryRepository.update(updateCategory);
-//		findAllTest();
-//	}
-
 
 }
