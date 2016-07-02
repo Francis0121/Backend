@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Slf4j
 @Repository
@@ -45,6 +46,11 @@ public class BoardRepositoryImpl implements BoardRepository {
 
 	@Override
 	public Optional<Board> findOne(Long id) {
+		return null;
+	}
+
+	@Override
+	public Stream<Board> findListByTitleOrderByBoardIdDesc(String title) {
 		return null;
 	}
 }

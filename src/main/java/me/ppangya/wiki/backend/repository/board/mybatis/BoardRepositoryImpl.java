@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Slf4j
 @Repository
@@ -39,6 +40,11 @@ public class BoardRepositoryImpl implements BoardRepository {
 	@Override
 	public Optional<Board> findOne(Long id) {
 		return Optional.ofNullable(sqlSessionTemplate.selectOne("board.findOne", id));
+	}
+
+	@Override
+	public Stream<Board> findListByTitleOrderByBoardIdDesc(String title) {
+		return null;
 	}
 }
 
