@@ -6,12 +6,12 @@
 
     <parent>
         <groupId>me.ppanya</groupId>
-        <artifactId>wiki</artifactId>
+        <artifactId>wiki.backend</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>me.ppanya.wiki</groupId>
-    <artifactId>rest-api</artifactId>
+    <groupId>me.ppanya</groupId>
+    <artifactId>wiki.rest-api</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
 
@@ -27,6 +27,7 @@
         <!-- Query Dsl Java Annotation Processor -->
         <com.mysema.querydsl.version>3.7.3</com.mysema.querydsl.version>
 
+        <!-- Test Library. Running only Test -->
         <org.junit.version>4.12</org.junit.version>
         <org.mockito.version>1.10.19</org.mockito.version>
         <com.jayway.jsonpath.version>2.2.0</com.jayway.jsonpath.version>
@@ -36,12 +37,12 @@
 
         <!-- PPanya Framework-->
         <dependency>
-            <groupId>me.ppanya.wiki</groupId>
-            <artifactId>framework</artifactId>
+            <groupId>me.ppanya</groupId>
+            <artifactId>wiki.framework</artifactId>
             <version>1.0.0</version>
         </dependency>
 
-
+        <!-- Query Dsl Java Annotation Processor -->
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
@@ -74,7 +75,13 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.groupId}-${project.artifactId}-${project.version}</finalName>
+
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
 
         <plugins>
 
@@ -149,11 +156,6 @@
 
         </plugins>
 
-        <testResources>
-            <testResource>
-                <directory>${basedir}/src/test/resources</directory>
-            </testResource>
-        </testResources>
     </build>
 
 </project>
