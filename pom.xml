@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.ppanya.wiki</groupId>
-    <artifactId>core</artifactId>
+    <artifactId>backend</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>../RestApi</module>
-        <module>../Framework</module>
+        <module>RestApi</module>
+        <module>Framework</module>
     </modules>
 
 </project>

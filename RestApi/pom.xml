@@ -78,6 +78,13 @@
 
     <dependencies>
 
+        <!-- PPanya Framework-->
+        <dependency>
+            <groupId>me.ppanya.wiki</groupId>
+            <artifactId>framework</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
