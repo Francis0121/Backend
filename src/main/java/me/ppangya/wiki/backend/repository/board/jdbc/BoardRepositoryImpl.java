@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Slf4j
 @Repository
@@ -62,5 +63,15 @@ public class BoardRepositoryImpl implements BoardRepository {
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("boardId={}", boardId);
 		}
+	}
+
+	@Override
+	public Stream<Board> findListByTitleOrderByBoardIdDesc(String title) {
+		return null;
+	}
+
+	@Override
+	public Optional<Board> findOneByBoardIdOrderByBoardIdAsc(Long boardId) {
+		return null;
 	}
 }

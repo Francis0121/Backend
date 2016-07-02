@@ -39,6 +39,7 @@ jpa | sqlite | x
 	* spring.data.jpa 1.10.1.RELEASE
 		* org.hibernate.javax.persistence 1.0.0.Final
 		* org.hibernate 5.1.0.Final
+    * com.mysema.querydsl 3.7.3        
 * Validator
 	* org.hibernate.validator 5.2.4.Final
 	* javax.el 2.2
@@ -67,6 +68,7 @@ jpa | sqlite | x
 * Spring JDBC Template [[Link] Docs](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html)
 * Mybatis Template [[Link] Docs](http://www.mybatis.org/mybatis-3/)
 * Spring data JPA [[Link] Docs](http://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+* QueryDsl [[Link] Docs](http://www.querydsl.com/static/querydsl/3.4.3/reference/ko-KR/html/ch02.html)
 		
 ## Logging
   
