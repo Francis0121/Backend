@@ -67,6 +67,8 @@ crashlytics-build.properties
 ppangya.wiki.mv.db
 ppangya.wiki.db
 ppangya.wiki.trace.db
+ppangya.wiki.lock.db
 
 # Deploy Directory
 deploy
+

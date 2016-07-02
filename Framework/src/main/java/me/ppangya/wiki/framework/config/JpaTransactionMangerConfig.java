@@ -33,7 +33,7 @@ public class JpaTransactionMangerConfig {
 		localContainerEntityManagerFactoryBean.setDataSource(dataSource);
 		localContainerEntityManagerFactoryBean.setJpaProperties(properties());
 		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-		localContainerEntityManagerFactoryBean.setPackagesToScan("me.ppangya.wiki.backend.repository.entity");
+		localContainerEntityManagerFactoryBean.setPackagesToScan("me.ppangya.wiki.rest.repository.entity");
 		return localContainerEntityManagerFactoryBean;
 	}
 

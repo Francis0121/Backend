@@ -322,7 +322,7 @@
                 <configuration>
                     <argLine>-Duser.language=en -Duser.region=US</argLine>
                     <systemPropertyVariables>
-                        <orm>mybatis</orm>
+                        <orm>jpa</orm>
                         <database>h2</database>
                     </systemPropertyVariables>
                 </configuration>
