@@ -15,7 +15,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.backend.controller", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class)})
+@ComponentScan(useDefaultFilters = false, basePackages = "me.ppangya.wiki.rest.controller", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ControllerAdvice.class)})
 public class DispatcherServletConfig extends WebMvcConfigurerAdapter {
 
 	@Override

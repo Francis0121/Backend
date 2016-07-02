@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @OrmConditional(values = SystemProperties.ObjectRelationalMapping.JPA)
 @Configuration
-@EnableJpaRepositories(basePackages = "me.ppangya.wiki.backend.repository", entityManagerFactoryRef = "localContainerEntityManagerFactoryBean", transactionManagerRef = "dataSourceTransactionManager")
+@EnableJpaRepositories(basePackages = "me.ppangya.wiki.rest.repository", entityManagerFactoryRef = "localContainerEntityManagerFactoryBean", transactionManagerRef = "dataSourceTransactionManager")
 public class JpaTransactionMangerConfig {
 
 	static {

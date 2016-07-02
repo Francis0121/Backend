@@ -19,7 +19,7 @@ import static me.ppangya.wiki.framework.constant.SystemProperties.OBJECT_RELATIO
 @Configuration
 @Import(value = {DataSourceConfig.class, JdbcTransactionMangerConfig.class, MybatisTransactionMangerConfig.class, JpaTransactionMangerConfig.class})
 @PropertySource(value = "classpath:properties/default.properties")
-@ComponentScan(useDefaultFilters = false, basePackages = {"me.ppangya.wiki.backend.repository", "me.ppangya.wiki.backend.service"}, includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Service.class)})
+@ComponentScan(useDefaultFilters = false, basePackages = {"me.ppangya.wiki.rest.repository", "me.ppangya.wiki.rest.service"}, includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Repository.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Service.class)})
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class RootApplicationConfig {
 
