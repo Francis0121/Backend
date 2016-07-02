@@ -46,5 +46,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 	public Stream<Board> findListByTitleOrderByBoardIdDesc(String title) {
 		return null;
 	}
+
+	@Override
+	public Optional<Board> findOneByBoardIdOrderByBoardIdAsc(Long boardId) {
+		return null;
+	}
 }
 

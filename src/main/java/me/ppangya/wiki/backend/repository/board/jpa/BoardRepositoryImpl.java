@@ -4,16 +4,18 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import me.ppangya.wiki.backend.repository.board.BoardRepositoryCustom;
 import me.ppangya.wiki.backend.repository.entity.Board;
 import me.ppangya.wiki.backend.repository.entity.QBoard;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class BoardRepositoryImpl implements BoardRepositoryCustom {
 
-    private @Autowired EntityManager entityManager;
+    private @PersistenceContext EntityManager entityManager;
 
     @Override
     public Stream<Board> findListByTitleOrderByBoardIdDesc(String title) {
@@ -21,5 +23,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
         QBoard board = new QBoard("board");
         List<Board> boardList = query.from(board).where(board.title.like("".concat(title).concat(""))).orderBy(board.boardId.desc()).list(board);
         return CollectionUtils.isEmpty(boardList) ? Stream.empty() : boardList.stream();
+    }
+
+    @Override
+    public Optional<Board> findOneByBoardIdOrderByBoardIdAsc(Long boardId) {
+        String query = "SELECT board_id AS boardId, title FROM BOARD WHERE board_id = ?";
+        Query nativeQuery = entityManager.createNativeQuery(query, Board.class).setParameter(1, boardId);
+        Object result = nativeQuery.getSingleResult();
+        return result == null ? Optional.empty() : Optional.of((Board) result);
     }
 }

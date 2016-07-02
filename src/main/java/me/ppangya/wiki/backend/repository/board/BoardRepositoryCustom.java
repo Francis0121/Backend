@@ -2,6 +2,7 @@ package me.ppangya.wiki.backend.repository.board;
 
 import me.ppangya.wiki.backend.repository.entity.Board;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface BoardRepositoryCustom {
@@ -14,4 +15,11 @@ public interface BoardRepositoryCustom {
      */
     Stream<Board> findListByTitleOrderByBoardIdDesc(String title);
 
+    /**
+     * Nativee Query Exampe Code (TODO : 다른 코드에서 Native 쿼리 사용시 삭제)
+     *
+     * @param boardId
+     * @return
+     */
+    Optional<Board> findOneByBoardIdOrderByBoardIdAsc(Long boardId);
 }

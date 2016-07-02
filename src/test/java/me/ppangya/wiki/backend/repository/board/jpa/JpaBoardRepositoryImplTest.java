@@ -52,6 +52,9 @@ public class JpaBoardRepositoryImplTest {
         logger.debug("{}", board);
     }
 
+    /**
+     * QueryDsl Example Test Case
+     */
     @Test
     public void findListByTitleOrderByBoardIdDescTest() {
         List<Board> boardList = Arrays.asList(new Board(null, "Title"), new Board(null, "Title"));
@@ -61,4 +64,18 @@ public class JpaBoardRepositoryImplTest {
         Assert.assertThat(boardStream.count(), is(2L));
     }
 
+    /**
+     * Natvie Query Example
+     */
+    @Test
+    public void findOneByBoardIdOrderByBoardIdAscTest() {
+        Board board = new Board(null, "Board Title");
+        boardRepository.save(board);
+
+        Optional<Board> boardOptional = boardRepository.findOneByBoardIdOrderByBoardIdAsc(board.getBoardId());
+        Board findBoard = boardOptional.orElseThrow(RuntimeException::new);
+        Assert.assertThat(findBoard, is(board));
+        Assert.assertThat(findBoard.getBoardId(), is(board.getBoardId()));
+        Assert.assertThat(findBoard.getTitle(), is(board.getTitle()));
+    }
 }
