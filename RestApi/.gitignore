@@ -64,6 +64,7 @@ crashlytics-build.properties
 # Created by .ignore support plugin (hsz.mobi)
 
 # Database File
+ppangya.wiki.h2.db
 ppangya.wiki.mv.db
 ppangya.wiki.db
 ppangya.wiki.trace.db
@@ -71,4 +72,3 @@ ppangya.wiki.lock.db
 
 # Deploy Directory
 deploy
-
