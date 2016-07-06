@@ -27,7 +27,7 @@
         <!-- Library Version -->
 
         <!-- Spring Framework -->
-        <org.springframework.version>4.3.0.RC1</org.springframework.version>
+        <org.springframework.version>4.3.1.RELEASE</org.springframework.version>
 
         <!-- Json -->
         <com.fasterxml.jackson.core.version>2.7.4</com.fasterxml.jackson.core.version>
@@ -64,17 +64,6 @@
         <org.mockito.version>1.10.19</org.mockito.version>
         <com.jayway.jsonpath.version>2.2.0</com.jayway.jsonpath.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <dependencies>
         <!-- Spring Framework -->
