@@ -41,8 +41,7 @@ public class RootApplicationConfig {
 			throw new RuntimeException(databaseProperty);
 		}
 
-		return new SystemProperties(ObjectRelationalMapping.valueOf(ormProperty.toUpperCase()), Database.valueOf(databaseProperty
-			.toUpperCase()));
+		return new SystemProperties(ObjectRelationalMapping.valueOf(ormProperty.toUpperCase()), Database.valueOf(databaseProperty.toUpperCase()));
 	}
 
 	@Bean

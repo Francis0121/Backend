@@ -91,4 +91,44 @@ public class DataSourceConfig {
 		resourceDatabasePopulator.addScript(h2InitDatabaseResource);
 		return resourceDatabasePopulator;
 	}
+
+	/**
+	 * MySQL
+	 */
+	private @Value("${me.ppangya.wiki.mysql.jdbc.driver.class.name}") String mysqlDriverClassName;
+	private @Value("${me.ppangya.wiki.mysql.jdbc.url}") String mysqlUrl;
+	private @Value("${me.ppangya.wiki.mysql.jdbc.username}") String mysqlUsername;
+	private @Value("${me.ppangya.wiki.mysql.jdbc.password}") String mysqlPassword;
+	private @Value("${me.ppangya.wiki.mysql.jdbc.initializer.enabled}") Boolean mysqlInitializerEnabled;
+
+	private @Value("classpath:database/scheme/mysql_init.sql") Resource mysqlInitDatabaseResource;
+
+	@DatabaseConditional(value = Database.MYSQL)
+	@Bean(name="dataSource", destroyMethod = "close")
+	public DataSource mysqlDataSource() {
+		DataSource dataSource = new DataSource();
+		dataSource.setDriverClassName(mysqlDriverClassName);
+		dataSource.setUrl(mysqlUrl);
+		dataSource.setUsername(mysqlUsername);
+		dataSource.setPassword(mysqlPassword);
+		return dataSource;
+	}
+
+	@DatabaseConditional(value = Database.MYSQL)
+	@OrmConditional(values = {ObjectRelationalMapping.JPA, ObjectRelationalMapping.MYBATIS, ObjectRelationalMapping.JDBC})
+	@Bean(name = "dataSourceInitializer")
+	public DataSourceInitializer mysqlDataSourceInitializer() {
+		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
+		dataSourceInitializer.setDataSource(mysqlDataSource());
+		dataSourceInitializer.setEnabled(mysqlInitializerEnabled);
+		dataSourceInitializer.setDatabasePopulator(mysqlDatabasePopulator());
+		return dataSourceInitializer;
+	}
+
+	private DatabasePopulator mysqlDatabasePopulator() {
+		ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+		resourceDatabasePopulator.addScript(mysqlInitDatabaseResource);
+		return resourceDatabasePopulator;
+	}
+
 }
