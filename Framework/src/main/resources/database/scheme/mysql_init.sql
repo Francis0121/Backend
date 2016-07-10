@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `404temp`.`BOARD`;
+
+CREATE TABLE `404temp`.`BOARD` (
+  `board_id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`board_id`));
+
+DROP TABLE IF EXISTS `404temp`.`CATEGORY`;
+
+CREATE TABLE `404temp`.`CATEGORY` (
+	`category_id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`category_id`));

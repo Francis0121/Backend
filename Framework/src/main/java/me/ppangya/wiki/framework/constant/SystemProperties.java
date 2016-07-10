@@ -19,7 +19,8 @@ public class SystemProperties {
 
 	public enum Database {
 		SQLITE,
-		H2
+		H2,
+		MYSQL
 	}
 
 	private @Getter ObjectRelationalMapping objectRelationalMapping;
